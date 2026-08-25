@@ -1,0 +1,11 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+node_modules/
+web/dist/
+supabase/.branches/
+supabase/.temp/
+supabase/functions/.env
+coverage/
+.playwright-cli/

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0a0a0d" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'self' https://*.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Unsubscribe · Codex Reset Alerts</title>
+  </head>
+  <body class="centered-page">
+    <main class="unsubscribe-card">
+      <a class="brand" href="../">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <span>Codex Reset Alerts</span>
+      </a>
+      <p class="section-kicker accent">Manage subscription</p>
+      <h1>Stop Discord alerts?</h1>
+      <p>
+        This removes the subscription associated with this private link and immediately erases the stored
+        webhook credential. It won’t affect any other subscription.
+      </p>
+      <button class="button button-danger button-full" id="unsubscribe-button" type="button">
+        Remove subscription
+      </button>
+      <p class="form-message" id="unsubscribe-message" role="status" hidden></p>
+      <a class="text-link back-link" href="../">← Back to Codex Reset Alerts</a>
+    </main>
+    <script type="module" src="/src/unsubscribe.ts"></script>
+  </body>
+</html>

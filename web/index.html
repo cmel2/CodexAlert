@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Get a Discord notification when Codex limits appear to reset. No account required."
+    />
+    <meta name="theme-color" content="#0a0a0d" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'self' https://*.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Codex Reset Alerts</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-shell">
+      <header class="site-header container">
+        <a class="brand" href="./" aria-label="Codex Reset Alerts home">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          <span>Codex Reset Alerts</span>
+        </a>
+        <a class="header-link" href="https://github.com/cmel2/CodexAlert" target="_blank" rel="noreferrer">
+          View source <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+
+      <main id="main">
+        <section class="hero container">
+          <div class="eyebrow"><span class="pulse-dot"></span> Discord notifications for Codex</div>
+          <h1>Know when<br /><span>Codex resets.</span></h1>
+          <p class="hero-copy">
+            Get a Discord notification when Codex limits appear to reset. One webhook, no account,
+            no inbox noise.
+          </p>
+          <a class="button button-primary hero-cta" href="#subscribe">Add Discord notification</a>
+          <p class="microcopy">Checks every 30 minutes · Free community service</p>
+        </section>
+
+        <section class="status-wrap container" aria-labelledby="status-heading">
+          <article class="status-card" id="status-card" data-state="unknown">
+            <div class="status-main">
+              <p class="section-kicker" id="status-heading">Current tracker status</p>
+              <div class="status-line">
+                <span class="status-dot" id="status-dot" data-state="unknown" aria-hidden="true"></span>
+                <strong id="status-label" aria-live="polite">Checking…</strong>
+              </div>
+            </div>
+            <dl class="status-meta">
+              <div>
+                <dt>Last checked</dt>
+                <dd id="last-checked">Checking…</dd>
+              </div>
+              <div>
+                <dt>Last reported reset</dt>
+                <dd id="last-reset">Checking…</dd>
+              </div>
+            </dl>
+          </article>
+        </section>
+
+        <section class="subscribe-section" id="subscribe" aria-labelledby="subscribe-heading">
+          <div class="container subscribe-grid">
+            <div class="subscribe-copy">
+              <p class="section-kicker accent">Set it once</p>
+              <h2 id="subscribe-heading">Send the next reset<br />straight to Discord.</h2>
+              <p>
+                Create an incoming webhook for the channel you want to notify, paste it here, and
+                we’ll verify it with a test message before saving the subscription.
+              </p>
+              <a
+                class="text-link"
+                href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks"
+                target="_blank"
+                rel="noreferrer"
+              >How to create a Discord webhook <span aria-hidden="true">↗</span></a>
+            </div>
+
+            <div class="form-card">
+              <form id="subscribe-form" novalidate>
+                <label for="webhook-url">Discord webhook URL</label>
+                <div class="input-wrap">
+                  <span class="input-icon" aria-hidden="true">#</span>
+                  <input
+                    id="webhook-url"
+                    name="webhook-url"
+                    type="url"
+                    inputmode="url"
+                    autocomplete="off"
+                    spellcheck="false"
+                    maxlength="500"
+                    placeholder="https://discord.com/api/webhooks/…"
+                    required
+                  />
+                </div>
+                <button class="button button-primary button-full" id="subscribe-button" type="submit">
+                  Test &amp; subscribe
+                </button>
+                <p class="form-note">A confirmation will appear in your Discord channel.</p>
+                <p class="form-message" id="form-message" role="status" hidden></p>
+              </form>
+
+              <section class="success-panel" id="success-panel" aria-live="polite" hidden>
+                <div class="success-icon" aria-hidden="true">✓</div>
+                <div>
+                  <h3>You’re subscribed.</h3>
+                  <p>A test message was delivered. Save this private link—you’ll need it to unsubscribe.</p>
+                </div>
+                <label for="unsubscribe-link">Your unsubscribe link</label>
+                <div class="copy-row">
+                  <input id="unsubscribe-link" type="text" readonly />
+                  <button class="button button-secondary" id="copy-link" type="button">Copy link</button>
+                </div>
+                <p class="credential-note">Anyone with this link can remove the subscription.</p>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="steps-section container" aria-labelledby="steps-heading">
+          <p class="section-kicker">How it works</p>
+          <h2 id="steps-heading">Quiet until it matters.</h2>
+          <div class="steps-grid">
+            <article class="step-card">
+              <span class="step-number">01</span>
+              <div class="step-icon" aria-hidden="true">⌁</div>
+              <h3>Add a webhook</h3>
+              <p>Choose a Discord channel and paste its incoming webhook URL. No login or OAuth needed.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-number">02</span>
+              <div class="step-icon" aria-hidden="true">◷</div>
+              <h3>We check once</h3>
+              <p>A single global check runs every 30 minutes—never one poll per subscriber.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-number">03</span>
+              <div class="step-icon" aria-hidden="true">↗</div>
+              <h3>Discord gets the alert</h3>
+              <p>When the tracker reports a new reset, your channel receives one concise notification.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="privacy-section">
+          <div class="container privacy-grid">
+            <div class="privacy-visual" aria-hidden="true">
+              <div class="lock-orbit orbit-one"></div>
+              <div class="lock-orbit orbit-two"></div>
+              <div class="lock-core">⌾</div>
+            </div>
+            <div class="privacy-copy">
+              <p class="section-kicker accent">Private by design</p>
+              <h2>Your webhook is a credential.<br />We treat it like one.</h2>
+              <p>
+                Webhook URLs are encrypted before storage, never returned to the browser, and used only
+                to deliver the notifications you requested. The public website contains no server secrets.
+              </p>
+              <ul class="check-list">
+                <li>Encrypted at rest with a server-only key</li>
+                <li>No email, name, Discord account, or OAuth</li>
+                <li>Credential material removed when you unsubscribe</li>
+                <li>Open source security model</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="faq-section container" aria-labelledby="faq-heading">
+          <p class="section-kicker">The fine print</p>
+          <h2 id="faq-heading">Questions, answered.</h2>
+          <div class="faq-list">
+            <details>
+              <summary>Is this an official OpenAI service?</summary>
+              <p>No. This is an unofficial community project and is not affiliated with or endorsed by OpenAI or Discord.</p>
+            </details>
+            <details>
+              <summary>How accurate are the reset alerts?</summary>
+              <p>Alerts reflect a third-party status source and may be delayed or inaccurate. Messages intentionally say limits “appear” to have reset.</p>
+            </details>
+            <details>
+              <summary>What data is stored?</summary>
+              <p>An encrypted webhook URL, keyed duplicate fingerprint, hashed unsubscribe token, delivery health timestamps, and bounded operational logs. We do not ask for identity data.</p>
+            </details>
+            <details>
+              <summary>Will the same reset spam my channel?</summary>
+              <p>No. Each reset and subscription pair has a unique database record, and deliveries are claimed before any Discord request is made.</p>
+            </details>
+            <details>
+              <summary>How do I unsubscribe?</summary>
+              <p>Use the private unsubscribe link shown once after setup. The webhook credential is removed immediately when that link is used.</p>
+            </details>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <div>
+            <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"><span></span></span>Codex Reset Alerts</a>
+            <p>Built for people who would rather be building.</p>
+          </div>
+          <p class="disclaimer">
+            Unofficial community project. Not affiliated with or endorsed by OpenAI or Discord.<br />
+            Reset information is provided by a third-party source and may be delayed or inaccurate.
+          </p>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
