@@ -1,5 +1,5 @@
 create extension if not exists pg_cron;
-create extension if not exists pg_net with schema extensions;
+create extension if not exists pg_net;
 create extension if not exists supabase_vault with schema vault;
 
 create or replace function public.invoke_codex_alert_check()
