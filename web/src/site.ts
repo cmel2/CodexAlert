@@ -1,4 +1,3 @@
-import "./fonts.css";
 import "./styles.css";
 
 const navToggle = document.querySelector<HTMLButtonElement>("#nav-toggle");
@@ -26,6 +25,7 @@ if (pageName) {
 const channelOptions = document.querySelectorAll<HTMLButtonElement>(".channel-option");
 const channelMessage = document.querySelector<HTMLElement>("#channel-message");
 const channelCta = document.querySelector<HTMLAnchorElement>("#channel-cta");
+const channelCtaLabel = document.querySelector<HTMLElement>("#channel-cta-label");
 
 function chooseChannel(option: HTMLButtonElement): void {
   const isAvailable = option.dataset.available === "true";
@@ -41,11 +41,15 @@ function chooseChannel(option: HTMLButtonElement): void {
   if (channelCta) {
     if (isAvailable) {
       channelCta.href = option.dataset.href ?? "./channels/discord/";
-      channelCta.textContent = "Set up Discord";
+      channelCta.classList.add("discord-button");
+      channelCta.classList.remove("button-primary");
+      if (channelCtaLabel) channelCtaLabel.textContent = "Add Discord Webhook";
       channelCta.removeAttribute("aria-disabled");
     } else {
       channelCta.href = "#channel-message";
-      channelCta.textContent = "See available channels";
+      channelCta.classList.remove("discord-button");
+      channelCta.classList.add("button-primary");
+      if (channelCtaLabel) channelCtaLabel.textContent = "See available channels";
       channelCta.setAttribute("aria-disabled", "true");
     }
   }

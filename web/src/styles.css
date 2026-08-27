@@ -15,7 +15,7 @@
   --danger: #ff8e80;
   --shadow: 0 22px 58px rgb(0 0 0 / 34%);
   color-scheme: dark;
-  font-family: "Roboto Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -173,7 +173,7 @@ summary:focus-visible {
   gap: 0.55rem;
   padding: 0.72rem 1.25rem;
   border: 1px solid var(--lime);
-  border-radius: 999px;
+  border-radius: 15px;
   background: var(--lime);
   color: var(--lime-ink);
   cursor: pointer;
@@ -295,7 +295,7 @@ summary:focus-visible {
   gap: 0.55rem;
   padding: 0.72rem 1.2rem;
   border: 1px solid var(--line-bright);
-  border-radius: 999px;
+  border-radius: 15px;
   background: transparent;
   color: var(--text);
   cursor: pointer;
@@ -320,6 +320,25 @@ summary:focus-visible {
 .hero-note strong {
   color: var(--muted-strong);
   font-weight: 600;
+}
+
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.15rem;
+  color: var(--muted-strong);
+  font-size: 0.84rem;
+  text-decoration: none;
+}
+
+.scroll-cue span {
+  color: var(--lime);
+  font-size: 1rem;
+}
+
+.scroll-cue:hover {
+  color: var(--lime);
 }
 
 .hero-art {
@@ -412,7 +431,7 @@ summary:focus-visible {
   gap: 0.5rem;
   padding: 0.7rem 0.95rem;
   border: 1px solid var(--line-bright);
-  border-radius: 999px;
+  border-radius: 15px;
   background: rgb(16 22 25 / 90%);
   color: var(--muted-strong);
   font-size: 0.78rem;
@@ -965,19 +984,19 @@ summary:focus-visible {
 .discord-button {
   display: flex;
   width: 100%;
-  min-height: 3.35rem;
+  min-height: 4rem;
   margin-top: 1rem;
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
   padding: 0.8rem 1rem;
-  border: 1px solid #4f7fff;
-  border-radius: 10px;
+  border: 2px solid #2e66ff;
+  border-radius: 16px;
   background: var(--blue);
   box-shadow: 0 0 20px rgb(44 93 221 / 25%);
   color: #fff;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.08rem;
   font-weight: 700;
   transition: background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
@@ -998,9 +1017,27 @@ summary:focus-visible {
 }
 
 .discord-button svg {
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 1.55rem;
+  height: 1.55rem;
   fill: currentColor;
+}
+
+.channel-cta {
+  width: auto;
+  max-width: 520px;
+  min-width: 250px;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+.channel-cta.button-primary {
+  border-width: 1px;
+  background: var(--lime);
+  color: var(--lime-ink);
+}
+
+.channel-cta.button-primary svg {
+  display: none;
 }
 
 .form-hint {
