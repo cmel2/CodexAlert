@@ -34,8 +34,8 @@ function chooseChannel(option: HTMLButtonElement): void {
   if (channelMessage) {
     channelMessage.dataset.tone = isAvailable ? "available" : "soon";
     channelMessage.textContent = isAvailable
-      ? "Discord is ready. Add an incoming webhook to get started."
-      : `${option.dataset.label ?? "This channel"} delivery is coming soon. Discord is available now.`;
+      ? "Discord is ready."
+      : `${option.dataset.label ?? "This channel"} is coming soon.`;
   }
 
   if (channelCta) {

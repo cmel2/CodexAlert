@@ -9,12 +9,12 @@ CodexAlert is a calm, dark notification utility. The reference direction is a ne
 - Use regular system sans for all interface text. Avoid condensed or decorative faces.
 - Use lime for the signal and primary action. Use Discord blue only for Discord setup.
 - Use square-ish soft corners (14–16px) on controls; avoid pills except small status tags.
-- Keep the homepage scrollable with a visible “Scroll to choose a channel” cue.
+- Keep the homepage fixed to one viewport with no vertical scrolling; deeper explanations live on subpages.
 - Use subpages for explanation, channel routes, FAQ, and unsubscribe instead of one dense page.
 
 ## Pages
 
-- `/` — hero, live source status, channel chooser, and a short next-step strip.
+- `/` — hero, live source status, channel chooser, and the Discord action in one viewport.
 - `/how-it-works/` — three-step source → dedupe → delivery explanation.
 - `/channels/` — Discord live, Telegram and Slack clearly marked coming soon.
 - `/channels/discord/` — the only active webhook setup form.
@@ -47,7 +47,7 @@ Every page uses the same header, mobile navigation, and footer. The footer keeps
 
 ## Responsive behavior
 
-At desktop widths the hero uses a two-column composition. Below 900px it stacks text before the alert tile and form columns. Below 760px the navbar becomes a keyboard-accessible menu, channel cards stack, buttons can fill the available width, and the footer becomes two rows.
+At desktop widths the homepage uses a fixed-height two-column composition with the status and channel rail beneath it. Below 900px it keeps the same fixed viewport and compresses the hero. Below 760px the navbar becomes a keyboard-accessible menu, the hero tile is removed to preserve the single-screen promise, channel choices stay in a compact row, and the footer remains visible.
 
 ## Product truth
 
