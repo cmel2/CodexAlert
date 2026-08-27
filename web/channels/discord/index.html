@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Add a Discord webhook to receive Codex reset alerts." />
+    <meta name="theme-color" content="#090d0e" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://fsawkrazbpndepoizejs.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <link rel="icon" href="/CodexAlert/favicon.svg" type="image/svg+xml" />
+    <title>Add Discord webhook — CodexAlert</title>
+  </head>
+  <body class="site-page" data-page="channels">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="../../" aria-label="CodexAlert home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 34h26l-3.5-5.4v-8.2c0-5.6-3.1-9.2-7.5-10.1V7h-4v3.3c-4.4.9-7.5 4.5-7.5 10.1v8.2zM17.5 38c.9 2.8 3.2 4.4 6.5 4.4s5.6-1.6 6.5-4.4z" /></svg></span>
+        <span>Codex<span class="brand-name-accent">Alert</span></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../../how-it-works/" data-page-link="how-it-works">How it works</a>
+        <a href="../../channels/" data-page-link="channels">Channels</a>
+        <a href="../../faq/" data-page-link="faq">FAQ</a>
+        <a class="header-action" href="./">Discord setup</a>
+      </nav>
+    </header>
+
+    <main id="main" class="page-main">
+      <section class="page-hero container">
+        <p class="page-kicker">Discord route</p>
+        <h1>Add a Discord<br /><span class="accent">webhook.</span></h1>
+        <p>Paste an incoming webhook from the channel you want to notify. We send a test message first, then keep the credential encrypted on the server.</p>
+      </section>
+
+      <section class="discord-layout container" aria-labelledby="discord-form-heading">
+        <div class="discord-explainer">
+          <h2>One webhook.<br />One quiet alert.</h2>
+          <p>No account or Discord login is needed. The shared checker runs once per minute for everyone.</p>
+          <ul>
+            <li>Test delivery confirms the destination before saving.</li>
+            <li>Webhook URLs stay encrypted and never return to this page.</li>
+            <li>Your private unsubscribe link appears after setup.</li>
+          </ul>
+          <p class="source-note">Need a webhook? <a href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks" target="_blank" rel="noreferrer">Discord’s webhook guide ↗</a></p>
+        </div>
+
+        <div class="form-card">
+          <h2 id="discord-form-heading">Add Discord Webhook</h2>
+          <p>We’ll post a confirmation to the channel before the subscription is saved.</p>
+          <form id="subscribe-form" novalidate>
+            <label class="form-label" for="webhook-url">Discord webhook URL</label>
+            <div class="input-wrap"><span class="input-prefix" aria-hidden="true">↗</span><input id="webhook-url" name="webhook-url" type="url" inputmode="url" autocomplete="off" spellcheck="false" maxlength="500" placeholder="https://discord.com/api/webhooks/…" required /></div>
+            <button class="discord-button" id="subscribe-button" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 4.3A16.5 16.5 0 0 0 15.4 3l-.5 1a14.5 14.5 0 0 0-5.8 0l-.5-1a16.5 16.5 0 0 0-4.1 1.3C1.8 8.2 1.1 12 1.4 15.8a16.5 16.5 0 0 0 5.1 2.6l1.2-1.6a10 10 0 0 1-1.9-.9l.5-.4c3.7 1.7 8.6 1.7 12.3 0l.5.4a10 10 0 0 1-1.9.9l1.2 1.6a16.5 16.5 0 0 0 5.1-2.6c.4-4.4-.7-8.1-3.6-11.5ZM8.7 14.2c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z" /></svg> Add Discord Webhook</button>
+            <p class="form-hint">By continuing, you agree to receive reset notifications in this channel.</p>
+            <p class="form-message" id="form-message" role="status" hidden></p>
+          </form>
+          <section class="success-panel" id="success-panel" aria-live="polite" hidden>
+            <h3>Discord route armed</h3>
+            <p>A test message was delivered. Save this private link to stop alerts later.</p>
+            <label for="unsubscribe-link">Private unsubscribe link</label>
+            <div class="copy-row"><input id="unsubscribe-link" type="text" readonly /><button class="copy-button" id="copy-link" type="button">Copy link</button></div>
+            <p class="credential-note">Anyone with this link can remove the subscription.</p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>DATA: <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">HASCODEXRATELIMITRESET.TODAY</a> / <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@JSKOIZ</a></span>
+      <span><a href="https://github.com/cmel2/CodexAlert" target="_blank" rel="noreferrer">Source on GitHub ↗</a></span>
+    </footer>
+    <script type="module" src="/src/discord.ts"></script>
+  </body>
+</html>

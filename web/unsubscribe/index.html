@@ -4,32 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#1d2528" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; connect-src 'self' https://fsawkrazbpndepoizejs.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
-    />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>Unsubscribe · Codex Reset Alerts</title>
+    <meta name="theme-color" content="#090d0e" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://fsawkrazbpndepoizejs.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <link rel="icon" href="/CodexAlert/favicon.svg" type="image/svg+xml" />
+    <title>Unsubscribe — CodexAlert</title>
   </head>
-  <body class="centered-page">
-    <main class="unsubscribe-card">
-      <a class="brand" href="../">
-        <span class="brand-cursor" aria-hidden="true">&gt;_</span>
-        <span>Codex Reset Alerts</span>
+  <body class="site-page centered-page" data-page="">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="../" aria-label="CodexAlert home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 34h26l-3.5-5.4v-8.2c0-5.6-3.1-9.2-7.5-10.1V7h-4v3.3c-4.4.9-7.5 4.5-7.5 10.1v8.2zM17.5 38c.9 2.8 3.2 4.4 6.5 4.4s5.6-1.6 6.5-4.4z" /></svg></span>
+        <span>Codex<span class="brand-name-accent">Alert</span></span>
       </a>
-      <p class="section-kicker accent">Manage subscription</p>
-      <h1>Stop Discord alerts?</h1>
-      <p>
-        This removes the subscription associated with this private link and immediately erases the stored
-        webhook credential. It won’t affect any other subscription.
-      </p>
-      <button class="button button-danger button-full" id="unsubscribe-button" type="button">
-        Remove subscription
-      </button>
-      <p class="form-message" id="unsubscribe-message" role="status" hidden></p>
-      <a class="text-link back-link" href="../">← Back to Codex Reset Alerts</a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../how-it-works/" data-page-link="how-it-works">How it works</a>
+        <a href="../channels/" data-page-link="channels">Channels</a>
+        <a href="../faq/" data-page-link="faq">FAQ</a>
+        <a class="header-action" href="../channels/discord/">Get notified <span aria-hidden="true">→</span></a>
+      </nav>
+    </header>
+
+    <main id="main" class="unsubscribe-main">
+      <section class="unsubscribe-card" aria-labelledby="unsubscribe-heading">
+        <p class="page-kicker">Manage subscription</p>
+        <h1 id="unsubscribe-heading">Stop Discord alerts?</h1>
+        <p>This removes the subscription associated with this private link and immediately erases the stored webhook credential. It won’t affect any other subscription.</p>
+        <button class="button-primary button-danger" id="unsubscribe-button" type="button">Remove subscription</button>
+        <p class="form-message" id="unsubscribe-message" role="status" hidden></p>
+        <a class="back-link" href="../">← Back to CodexAlert</a>
+      </section>
     </main>
+
+    <footer class="site-footer">
+      <span>DATA: <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">HASCODEXRATELIMITRESET.TODAY</a> / <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@JSKOIZ</a></span>
+      <span><a href="https://github.com/cmel2/CodexAlert" target="_blank" rel="noreferrer">Source on GitHub ↗</a></span>
+    </footer>
     <script type="module" src="/src/unsubscribe.ts"></script>
   </body>
 </html>

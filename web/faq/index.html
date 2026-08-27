@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Frequently asked questions about CodexAlert." />
+    <meta name="theme-color" content="#090d0e" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://fsawkrazbpndepoizejs.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <link rel="icon" href="/CodexAlert/favicon.svg" type="image/svg+xml" />
+    <title>FAQ — CodexAlert</title>
+  </head>
+  <body class="site-page" data-page="faq">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="../" aria-label="CodexAlert home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 34h26l-3.5-5.4v-8.2c0-5.6-3.1-9.2-7.5-10.1V7h-4v3.3c-4.4.9-7.5 4.5-7.5 10.1v8.2zM17.5 38c.9 2.8 3.2 4.4 6.5 4.4s5.6-1.6 6.5-4.4z" /></svg></span>
+        <span>Codex<span class="brand-name-accent">Alert</span></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../how-it-works/" data-page-link="how-it-works">How it works</a>
+        <a href="../channels/" data-page-link="channels">Channels</a>
+        <a href="../faq/" data-page-link="faq">FAQ</a>
+        <a class="header-action" href="../channels/discord/">Get notified <span aria-hidden="true">→</span></a>
+      </nav>
+    </header>
+
+    <main id="main" class="page-main">
+      <section class="page-hero container">
+        <p class="page-kicker">Field notes</p>
+        <h1>Before you<br /><span class="accent">plug in.</span></h1>
+        <p>Short answers about the signal, the source, and what happens to a Discord webhook.</p>
+      </section>
+
+      <section class="section container" aria-labelledby="faq-heading">
+        <div class="section-header"><h2 id="faq-heading">Questions, answered.</h2></div>
+        <div class="faq-list">
+          <details><summary>Is this an official OpenAI or Discord service?</summary><p>No. CodexAlert is an unofficial community project and is not affiliated with or endorsed by OpenAI or Discord.</p></details>
+          <details><summary>Where does the reset signal come from?</summary><p>Reset data comes from <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a>, created by <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a>. It is third-party data and may be delayed or inaccurate.</p></details>
+          <details><summary>How often does CodexAlert check?</summary><p>One shared Supabase check runs every minute for all subscribers. It does not poll once per subscriber.</p></details>
+          <details><summary>What happens to my webhook URL?</summary><p>It is tested, encrypted before storage, and never returned to the browser. Unsubscribing removes the stored credential.</p></details>
+          <details><summary>How do I stop alerts?</summary><p>Use the private unsubscribe link shown after Discord setup. Anyone with that link can remove the subscription, so keep it private.</p></details>
+          <details><summary>When will Telegram and Slack be ready?</summary><p>They are planned channels, but Discord is the only live delivery route today.</p></details>
+        </div>
+      </section>
+
+      <section class="cta-strip" aria-label="Choose a notification channel"><div><h2>Still want the signal?</h2><p>Discord setup takes one webhook and one test message.</p></div><a class="button-primary" href="../channels/discord/">Add Discord <span aria-hidden="true">→</span></a></section>
+    </main>
+
+    <footer class="site-footer">
+      <span>DATA: <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">HASCODEXRATELIMITRESET.TODAY</a> / <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@JSKOIZ</a></span>
+      <span><a href="https://github.com/cmel2/CodexAlert" target="_blank" rel="noreferrer">Source on GitHub ↗</a></span>
+    </footer>
+    <script type="module" src="/src/site.ts"></script>
+  </body>
+</html>

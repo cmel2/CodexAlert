@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="How CodexAlert reads the community reset signal and sends a Discord notification." />
+    <meta name="theme-color" content="#090d0e" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://fsawkrazbpndepoizejs.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <link rel="icon" href="/CodexAlert/favicon.svg" type="image/svg+xml" />
+    <title>How it works — CodexAlert</title>
+  </head>
+  <body class="site-page" data-page="how-it-works">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="../" aria-label="CodexAlert home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 34h26l-3.5-5.4v-8.2c0-5.6-3.1-9.2-7.5-10.1V7h-4v3.3c-4.4.9-7.5 4.5-7.5 10.1v8.2zM17.5 38c.9 2.8 3.2 4.4 6.5 4.4s5.6-1.6 6.5-4.4z" /></svg></span>
+        <span>Codex<span class="brand-name-accent">Alert</span></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../how-it-works/" data-page-link="how-it-works">How it works</a>
+        <a href="../channels/" data-page-link="channels">Channels</a>
+        <a href="../faq/" data-page-link="faq">FAQ</a>
+        <a class="header-action" href="../channels/discord/">Get notified <span aria-hidden="true">→</span></a>
+      </nav>
+    </header>
+
+    <main id="main" class="page-main">
+      <section class="page-hero container">
+        <p class="page-kicker">Simple as 1–2–3</p>
+        <h1>Less refreshing.<br /><span class="accent">More building.</span></h1>
+        <p>CodexAlert turns one community-maintained reset signal into a quiet notification route. The check is shared, the signal is deduplicated, and your webhook only hears about a new event.</p>
+      </section>
+
+      <section class="section container" aria-labelledby="steps-heading">
+        <div class="section-header"><h2 id="steps-heading">The signal path</h2><p>One source, one scheduled check, one delivery per reset.</p></div>
+        <div class="steps-list">
+          <article class="step"><span class="step-number">1</span><div><h2>We read the source</h2><p>Supabase checks <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a> once per minute. The source is a third-party community project created by <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a>.</p></div></article>
+          <article class="step"><span class="step-number">2</span><div><h2>We lock the event</h2><p>A stable reset timestamp or source event ID is stored so the same reset cannot trigger a second notification for the same subscription.</p></div></article>
+          <article class="step"><span class="step-number">3</span><div><h2>Your channel gets the pulse</h2><p>Discord receives one concise message when a new reset is reported. Telegram and Slack routes will follow in a later release.</p></div></article>
+        </div>
+        <div class="note-band"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v2H5a2 2 0 0 0-2 2v9h18v-9a2 2 0 0 0-2-2h-2V7a5 5 0 0 0-5-5Zm-3 7V7a3 3 0 0 1 6 0v2H9Zm3 3a2 2 0 0 1 1 3.7V18h-2v-2.3A2 2 0 0 1 12 12Z" /></svg><span>Webhook URLs are encrypted before storage and never returned to the browser.</span></div>
+      </section>
+
+      <section class="cta-strip" aria-label="Choose a notification channel"><div><h2>Ready to choose a route?</h2><p>Discord is available now. The channel picker keeps the next options visible.</p></div><a class="button-primary" href="../channels/">View channels <span aria-hidden="true">→</span></a></section>
+    </main>
+
+    <footer class="site-footer">
+      <span>DATA: <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">HASCODEXRATELIMITRESET.TODAY</a> / <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@JSKOIZ</a></span>
+      <span><a href="https://github.com/cmel2/CodexAlert" target="_blank" rel="noreferrer">Source on GitHub ↗</a></span>
+    </footer>
+    <script type="module" src="/src/site.ts"></script>
+  </body>
+</html>

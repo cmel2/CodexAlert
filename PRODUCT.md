@@ -8,30 +8,30 @@ web
 
 ## Users
 
-Codex users who coordinate in Discord and want a low-friction signal when the community reset tracker reports that limits appear to have reset.
+Codex users who want a low-friction signal when the community reset tracker reports that limits appear to have reset.
 
 ## Product Purpose
 
-Codex Reset Alerts lets someone connect a Discord channel without creating an account. The service checks one shared reset source, deduplicates reset events, and sends at most one notification per subscription and reset identifier.
+Codex Reset Alerts lets someone choose a notification route without creating an account. Discord is live; Telegram and Slack are visible as planned routes. The service checks one shared reset source, deduplicates reset events, and sends at most one notification per subscription and reset identifier.
 
 ## Positioning
 
-A small, open-source bridge from a community-maintained Codex reset signal to Discord incoming webhooks, with no user account or Discord OAuth flow.
+A small, open-source bridge from a community-maintained Codex reset signal to notification channels, with no user account or OAuth flow.
 
 ## Operating Context
 
-Visitors arrive on a public GitHub Pages site, review the current sanitized status, paste a Discord incoming webhook, receive a test message, and keep a private unsubscribe link. Supabase Edge Functions handle all credential operations and Supabase Cron schedules the shared status check.
+Visitors arrive on a public GitHub Pages site, choose a channel, paste a Discord incoming webhook when that route is available, receive a test message, and keep a private unsubscribe link. Supabase Edge Functions handle all credential operations and Supabase Cron schedules the shared status check.
 
 ## Capabilities and Constraints
 
-- Current notification channel: Discord only.
+- Current notification channel: Discord is available now; Telegram and Slack are announced as coming soon without backend support yet.
 - Reset source: `https://hascodexratelimitreset.today/`, created by [@jskoiz](https://x.com/jskoiz).
 - The source is third-party and may be delayed or inaccurate; product copy must say limits “appear” to have reset.
 - No names, emails, Discord accounts, or OAuth are collected.
 - Discord webhook URLs are credentials and must never be exposed in public source, browser responses, or logs.
 - GitHub Pages hosts the static frontend; Supabase hosts persistence, Edge Functions, Vault, and the scheduler.
 - The status check runs globally, never once per subscriber.
-- Telegram and Slack are future work and are not part of the current product.
+- Telegram and Slack are future delivery work and must remain clearly marked as unavailable until implemented.
 
 ## Brand Commitments
 

@@ -4,11 +4,13 @@
 [![Live site](https://img.shields.io/website?url=https%3A%2F%2Fcmel2.github.io%2FCodexAlert%2F&label=site)](https://cmel2.github.io/CodexAlert/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111.svg)](LICENSE)
 
-Get a Discord notification when Codex limits appear to have reset. No account required.
+Get a notification when Codex limits appear to have reset. No account required.
 
 **[Open the live site](https://cmel2.github.io/CodexAlert/)**
 
 Reset data comes from [hascodexratelimitreset.today](https://hascodexratelimitreset.today/), created by [@jskoiz](https://x.com/jskoiz). This project is unofficial and is not affiliated with OpenAI or Discord.
+
+Discord delivery is live. Telegram and Slack are visible in the channel picker as coming-soon routes.
 
 ## How it works
 
@@ -39,7 +41,7 @@ See [SECURITY.md](SECURITY.md) to report a vulnerability. Architecture and deplo
 
 - GitHub Pages + Vite + TypeScript
 - Supabase Postgres, Edge Functions, Vault, `pg_cron`, and `pg_net`
-- Discord incoming webhooks
+- Discord incoming webhooks (Telegram and Slack are planned)
 
 ## Local development
 

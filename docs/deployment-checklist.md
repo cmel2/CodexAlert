@@ -37,8 +37,8 @@
 - [ ] Edge `ALLOWED_ORIGINS` contains the exact Pages origin
 - [ ] Pages source set to GitHub Actions
 - [ ] Workflow tests/build succeeds
-- [ ] Home and `/unsubscribe/` load under `/CodexAlert/`
-- [ ] Subscribe, copy-link, status, and unsubscribe flows work in production
+- [ ] Home, `/how-it-works/`, `/channels/`, `/channels/discord/`, `/faq/`, and `/unsubscribe/` load under `/CodexAlert/`
+- [ ] Channel chooser, Discord subscribe/copy-link, status, and unsubscribe flows work in production
 - [ ] Mobile, tablet, keyboard, and reduced-motion behavior checked
 - [ ] Footer and notification disclaimer are visible and accurate
 
