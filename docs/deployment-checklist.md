@@ -12,9 +12,9 @@
 - [ ] `codex_alert_project_url` created in Vault
 - [ ] Matching `codex_alert_cron_secret` created in Vault
 - [ ] `subscribe`, `unsubscribe`, `status`, and `check-reset` deployed
-- [ ] Cron schedule is `*/30 * * * *`
+- [ ] Cron schedule is `* * * * *`
 - [ ] Manual `public.invoke_codex_alert_check()` produces a successful network request
-- [ ] Retention job is active
+- [ ] `pg_net` namespace warning reviewed and moved out of `public` during a planned maintenance window
 
 ## Product verification
 

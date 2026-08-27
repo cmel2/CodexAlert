@@ -19,10 +19,10 @@ One cron execution performs one third-party status request regardless of subscri
 
 ## Reset sequence
 
-1. Cron invokes `check-reset` every 30 minutes through `pg_net`.
+1. Cron invokes `check-reset` every minute through `pg_net`.
 2. The function rejects a bad `X-Cron-Secret` before doing any work.
 3. It fetches the source once with an 8-second timeout, no redirects, a 64 KiB response limit, a required 2xx status, and defensive JSON parsing.
-4. `state = no` updates the singleton status and appends a bounded check record.
+4. `state = no` updates the singleton status and appends a check record for observability; detailed history should be reviewed or pruned according to the operator's retention policy.
 5. `state = yes` requires a stable identity: normalized `resetAt`, source event ID, or source-event checked time. Top-level `updatedAt` is never an identity.
 6. `claim_reset_deliveries` takes an advisory transaction lock and inserts the unique reset event. If it already exists, it returns no work.
 7. For a new event, one unique delivery row is created for every active subscription and changed from `pending` to `processing` inside the same transaction.
@@ -37,7 +37,7 @@ One cron execution performs one third-party status request regardless of subscri
 This produces at-most-once behavior:
 
 - overlapping functions: one inserts the reset; the other sees a duplicate;
-- repeated 30-minute observation: existing reset returns no deliveries;
+- repeated one-minute observation: existing reset returns no deliveries;
 - crash before Discord: claimed delivery can be missed, never automatically duplicated;
 - timeout after POST: outcome is unknown, so it is recorded failed and never retried;
 - explicit 429: Discord states it did not accept the request, so one bounded retry is allowed;

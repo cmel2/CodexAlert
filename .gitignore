@@ -9,3 +9,11 @@ supabase/.temp/
 supabase/functions/.env
 coverage/
 .playwright-cli/
+.playwright-mcp/
+.impeccable/
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/review/
+.impeccable/comp-options.json
+.impeccable/direction-options.json
+.impeccable/index-brief-body.md

@@ -1,5 +1,6 @@
 import { ApiError, unsubscribe } from "./api.ts";
 import { getElement, setMessage } from "./dom.ts";
+import "./fonts.css";
 import "./styles.css";
 
 const button = getElement<HTMLButtonElement>("#unsubscribe-button");

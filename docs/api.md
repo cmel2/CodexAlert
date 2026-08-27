@@ -8,7 +8,7 @@ Browser requests are accepted only from `ALLOWED_ORIGINS`. Responses never inclu
 
 ```json
 {
-  "webhookUrl": "https://discord.com/api/webhooks/123456789012345678/secret-token"
+  "webhookUrl": "https://discord.com/api/webhooks/{webhook-id}/{webhook-token}"
 }
 ```
 

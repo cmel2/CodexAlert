@@ -1,5 +1,21 @@
 # Security model
 
+## Open-source readiness review (2026-08-27)
+
+The application source is safe to publish: repository and history scans found no Supabase secret keys, Discord webhook tokens, JWTs, or unsubscribe credentials. Live Supabase checks confirmed RLS is enabled on every application table, `anon` and `authenticated` have no table access, and all privileged functions are non-public. The public status API exposes only sanitized status fields.
+
+One live-project hardening item remains intentionally explicit: Supabase's advisor reports `pg_net` installed in the `public` schema. The app does not grant client roles access to its tables or internal functions, so this is not a credential leak, but moving the extension to `extensions` is recommended. Supabase's supported move drops and recreates `pg_net`, which clears the current three diagnostic HTTP response rows; the request queue is empty. Apply that maintenance change only during a planned window.
+
+After confirming the queue is empty and accepting the diagnostic-log loss, run this once as a database owner:
+
+```sql
+drop extension if exists pg_net;
+create extension pg_net with schema extensions;
+revoke all on schema net from public, anon, authenticated;
+revoke all on all tables in schema net from public, anon, authenticated;
+revoke all on all functions in schema net from public, anon, authenticated;
+```
+
 ## Protected assets
 
 - Discord webhook tokens

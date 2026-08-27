@@ -185,6 +185,11 @@ export function resetNotificationMessage(
       inline: true,
     });
   }
+  fields.push({
+    name: "Source",
+    value: "hascodexratelimitreset.today · created by @jskoiz",
+    inline: false,
+  });
   return {
     embeds: [{
       title: "Codex limits appear to have reset",
