@@ -41,6 +41,14 @@ describe("multi-page site contract", () => {
     }
   });
 
+  it("keeps the FAQ search, topics, and answer groups available", () => {
+    expect(faqHtml).toContain('id="faq-search"');
+    expect(faqHtml).toContain('id="faq-groups"');
+    expect(faqHtml).toContain('id="faq-empty"');
+    expect(faqHtml.match(/class="topic-filter"/gu)).toHaveLength(3);
+    expect(faqHtml.match(/class="faq-group"/gu)).toHaveLength(3);
+  });
+
   it("contains every required element selected by page scripts", () => {
     const contracts = [
       { html: discordHtml, source: discordSource },
