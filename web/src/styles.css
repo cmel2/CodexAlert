@@ -3342,3 +3342,58 @@ body[data-page="faq"] .faq-empty {
   }
 
 }
+
+@media (min-width: 901px) {
+  body[data-page="how-it-works"] {
+    height: 100svh;
+    max-height: 100svh;
+    overflow: hidden;
+  }
+
+  body[data-page="how-it-works"] .how-main {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  body[data-page="how-it-works"] .page-hero {
+    flex: 0 0 auto;
+    padding-block: 2.5rem 1.1rem;
+  }
+
+  body[data-page="how-it-works"] .section {
+    min-height: 0;
+    padding-block: 1.2rem 1.6rem;
+    overflow: hidden;
+  }
+
+  body[data-page="how-it-works"] .section-header {
+    margin-bottom: 0.8rem;
+  }
+
+  body[data-page="how-it-works"] .section-header h2 {
+    font-size: 2.5rem;
+  }
+
+  body[data-page="how-it-works"] .section-header p {
+    font-size: 0.95rem;
+  }
+
+  body[data-page="how-it-works"] .step {
+    padding-block: 0.35rem;
+  }
+
+  body[data-page="how-it-works"] .step h2 {
+    font-size: 1.45rem;
+  }
+
+  body[data-page="how-it-works"] .step p {
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  body[data-page="how-it-works"] .site-footer {
+    flex: 0 0 auto;
+  }
+}
