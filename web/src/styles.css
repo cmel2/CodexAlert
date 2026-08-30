@@ -3088,7 +3088,6 @@ body[data-page="faq"] .faq-intro {
 }
 
 body[data-page="faq"] .faq-kicker,
-body[data-page="faq"] .faq-contact > p,
 body[data-page="faq"] .faq-topics > p {
   margin: 0 0 1.1rem;
   color: #7d8ba4;
@@ -3167,6 +3166,10 @@ body[data-page="faq"] .faq-layout {
 body[data-page="faq"] .faq-topics {
   position: sticky;
   top: 1.5rem;
+  z-index: 4;
+  align-self: start;
+  padding-block: 0.45rem;
+  background: rgb(255 255 255 / 92%);
 }
 
 body[data-page="faq"] .faq-topics > p {
@@ -3316,42 +3319,9 @@ body[data-page="faq"] .faq-empty {
   font-size: 0.95rem;
 }
 
-body[data-page="faq"] .faq-contact {
-  display: grid;
-  width: min(980px, calc(100% - 48px));
-  margin-top: 1rem;
-  margin-bottom: clamp(3rem, 8vw, 6rem);
-  padding-top: 2.2rem;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 1rem;
-  border-top: 1px solid #e2e8f2;
-}
-
-body[data-page="faq"] .faq-contact > p {
-  grid-column: 1 / -1;
-  margin: 0;
-}
-
-body[data-page="faq"] .faq-contact h2 {
-  margin: 0;
-  color: #10244d;
-  font-family: Helvetica, Arial, "Nimbus Sans L", sans-serif;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 500;
-  letter-spacing: -0.06em;
-}
-
-body[data-page="faq"] .faq-contact .button-primary {
-  border-radius: 14px;
-  background: #1267f5;
-  color: #fff;
-}
-
 @media (max-width: 700px) {
   body[data-page="faq"] .faq-intro,
-  body[data-page="faq"] .faq-layout,
-  body[data-page="faq"] .faq-contact {
+  body[data-page="faq"] .faq-layout {
     width: min(100% - 30px, 620px);
   }
 
@@ -3369,11 +3339,15 @@ body[data-page="faq"] .faq-contact .button-primary {
   }
 
   body[data-page="faq"] .faq-topics {
-    position: static;
+    position: sticky;
+    top: 0.75rem;
+    z-index: 4;
     display: flex;
     align-items: center;
     gap: 0.4rem;
     margin-bottom: 2.1rem;
+    padding: 0.55rem 0;
+    background: rgb(255 255 255 / 94%);
     overflow-x: auto;
   }
 
@@ -3397,13 +3371,4 @@ body[data-page="faq"] .faq-contact .button-primary {
     padding-right: 0;
   }
 
-  body[data-page="faq"] .faq-contact {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  body[data-page="faq"] .faq-contact .button-primary {
-    width: 100%;
-  }
 }

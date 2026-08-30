@@ -47,6 +47,7 @@ describe("multi-page site contract", () => {
     expect(faqHtml).toContain('id="faq-empty"');
     expect(faqHtml.match(/class="topic-filter"/gu)).toHaveLength(3);
     expect(faqHtml.match(/class="faq-group"/gu)).toHaveLength(3);
+    expect(faqHtml).not.toContain("faq-contact");
   });
 
   it("contains every required element selected by page scripts", () => {

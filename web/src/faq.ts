@@ -16,21 +16,19 @@ function setExpanded(button: HTMLButtonElement, expanded: boolean): void {
   button.closest(".faq-item")?.classList.toggle("is-open", expanded);
 }
 
-function applyFilters(): void {
+function applySearch(): void {
   const query = search?.value.trim().toLowerCase() ?? "";
   let visibleCount = 0;
 
   items.forEach((item) => {
-    const matchesTopic = item.dataset.topic === activeTopic;
     const matchesQuery = !query || item.textContent?.toLowerCase().includes(query) === true;
-    const visible = matchesTopic && matchesQuery;
+    const visible = matchesQuery;
     item.hidden = !visible;
     if (visible) visibleCount += 1;
   });
 
   groups.forEach((group) => {
-    const visible = group.dataset.topicGroup === activeTopic && visibleCount > 0;
-    group.hidden = !visible;
+    group.hidden = ![...group.querySelectorAll<HTMLElement>(".faq-item")].some((item) => !item.hidden);
   });
   if (emptyState) emptyState.hidden = visibleCount > 0;
 }
@@ -39,7 +37,10 @@ filters.forEach((filter) => {
   filter.addEventListener("click", () => {
     activeTopic = filter.dataset.topic ?? "general";
     filters.forEach((item) => item.setAttribute("aria-pressed", String(item === filter)));
-    applyFilters();
+    document.querySelector<HTMLElement>(`[data-topic-group="${activeTopic}"]`)?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
   });
 });
 
@@ -49,5 +50,5 @@ document.querySelectorAll<HTMLButtonElement>(".faq-question").forEach((button) =
   });
 });
 
-search?.addEventListener("input", applyFilters);
-applyFilters();
+search?.addEventListener("input", applySearch);
+applySearch();
