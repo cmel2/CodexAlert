@@ -50,6 +50,13 @@ describe("multi-page site contract", () => {
     expect(faqHtml).not.toContain("faq-contact");
   });
 
+  it("keeps the simplified supporting pages free of removed callouts", () => {
+    expect(howItWorksHtml).not.toContain("note-band");
+    expect(howItWorksHtml).not.toContain("cta-strip");
+    expect(channelsHtml).not.toContain("Source register");
+    expect(channelsHtml).not.toContain("side-note");
+  });
+
   it("contains every required element selected by page scripts", () => {
     const contracts = [
       { html: discordHtml, source: discordSource },
