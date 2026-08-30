@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Choose where to receive a Discord alert when the community Codex reset tracker reports a reset." />
-    <meta name="theme-color" content="#090d0e" />
+    <meta name="description" content="CodexAlert watches the community Codex reset tracker and notifies you instantly." />
+    <meta name="theme-color" content="#f7f9fe" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://fsawkrazbpndepoizejs.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
     <link rel="icon" href="/CodexAlert/favicon.svg" type="image/svg+xml" />
     <title>CodexAlert — Reset alerts</title>
@@ -21,67 +21,47 @@
         <a href="./how-it-works/" data-page-link="how-it-works">How it works</a>
         <a href="./channels/" data-page-link="channels">Channels</a>
         <a href="./faq/" data-page-link="faq">FAQ</a>
-        <a class="header-action" href="./channels/discord/">Get notified <span aria-hidden="true">→</span></a>
+        <a class="header-action" href="./channels/discord/">Get Notified</a>
       </nav>
     </header>
 
     <main id="main" class="page-main">
-      <section class="hero container" aria-labelledby="hero-heading">
-        <div class="hero-copy-block">
-          <p class="eyebrow">Community reset signal</p>
-          <h1 id="hero-heading">Know the second<br />Codex limits <span class="accent">reset.</span></h1>
-          <p class="hero-copy">We check the community tracker once a minute so you don’t have to. Choose where you want the next reset signal delivered.</p>
-          <div class="hero-actions">
-            <a class="button-primary" href="./channels/discord/">Get notified now <span aria-hidden="true">→</span></a>
-            <a class="button-secondary" href="./how-it-works/">How it works <span aria-hidden="true">›</span></a>
+      <section class="home-hero" aria-labelledby="hero-heading">
+        <h1 id="hero-heading">We watch the tracker.<br />You get notified <span>instantly.</span></h1>
+        <p>CodexAlert monitors the community tracker around the clock<br class="desktop-break" /> and notifies you the moment Codex rate limits reset.</p>
+      </section>
+
+      <section class="notify-stage" aria-label="Notification channel selection">
+        <div class="notify-control">
+          <div class="notify-copy"><strong>Notify me via</strong><span>Choose your channel</span></div>
+          <div class="notify-divider" aria-hidden="true"></div>
+          <div class="channel-picker">
+            <button class="channel-trigger" id="channel-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" data-channel="discord">
+              <span class="selected-channel-icon app-icon app-icon-discord" id="selected-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19.5 4.3A16.5 16.5 0 0 0 15.4 3l-.5 1a14.5 14.5 0 0 0-5.8 0l-.5-1a16.5 16.5 0 0 0-4.1 1.3C1.8 8.2 1.1 12 1.4 15.8a16.5 16.5 0 0 0 5.1 2.6l1.2-1.6a10 10 0 0 1-1.9-.9l.5-.4c3.7 1.7 8.6 1.7 12.3 0l.5.4a10 10 0 0 1-1.9.9l1.2 1.6a16.5 16.5 0 0 0 5.1-2.6c.4-4.4-.7-8.1-3.6-11.5ZM8.7 14.2c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z" /></svg></span>
+              <span id="selected-channel-label">Discord</span><span class="channel-chevron" aria-hidden="true">⌄</span>
+            </button>
+            <div class="channel-menu" id="channel-menu" role="listbox" aria-label="Choose a channel" hidden>
+              <button class="channel-option" type="button" role="option" data-channel="discord" data-label="Discord" data-available="true" data-href="./channels/discord/" aria-selected="true">
+                <span class="app-icon app-icon-discord" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19.5 4.3A16.5 16.5 0 0 0 15.4 3l-.5 1a14.5 14.5 0 0 0-5.8 0l-.5-1a16.5 16.5 0 0 0-4.1 1.3C1.8 8.2 1.1 12 1.4 15.8a16.5 16.5 0 0 0 5.1 2.6l1.2-1.6a10 10 0 0 1-1.9-.9l.5-.4c3.7 1.7 8.6 1.7 12.3 0l.5.4a10 10 0 0 1-1.9.9l1.2 1.6a16.5 16.5 0 0 0 5.1-2.6c.4-4.4-.7-8.1-3.6-11.5ZM8.7 14.2c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z" /></svg></span><span>Discord</span><span class="option-check" aria-hidden="true">✓</span>
+              </button>
+              <button class="channel-option" type="button" role="option" data-channel="telegram" data-label="Telegram" data-available="false" aria-selected="false">
+                <span class="app-icon app-icon-telegram" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m21.6 4.1-3.2 15.1c-.2 1.1-.8 1.4-1.7.9l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.3 12.9l-4.6-1.4c-1-.3-1-1 .2-1.5l18-6.9c.8-.3 1.5.2 1.7 1Z" /></svg></span><span>Telegram</span><span class="option-check" aria-hidden="true">✓</span>
+              </button>
+              <button class="channel-option" type="button" role="option" data-channel="slack" data-label="Slack" data-available="false" aria-selected="false">
+                <span class="app-icon app-icon-slack" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="#36c5f0" d="M9 2a3 3 0 0 0 0 6h3V5a3 3 0 0 0-3-3Z" /><path fill="#2eb67d" d="M16 9V6a3 3 0 1 0-3-3v6h3Z" /><path fill="#ecb22e" d="M22 15a3 3 0 0 0-6 0v3h3a3 3 0 0 0 3-3Z" /><path fill="#e01e5a" d="M8 16H5a3 3 0 1 0 3 3v-3Z" /></svg></span><span>Slack</span><span class="option-check" aria-hidden="true">✓</span>
+              </button>
+            </div>
           </div>
+          <a class="webhook-button" id="channel-cta" href="./channels/discord/"><span id="channel-cta-label">Add Webhook</span><span aria-hidden="true">→</span></a>
         </div>
-        <div class="hero-art" role="img" aria-label="A glowing lime alert bell on a dark signal tile">
-          <div class="signal-art">
-            <span class="spark spark-one" aria-hidden="true"></span>
-            <span class="spark spark-two" aria-hidden="true"></span>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M11 34h26l-3.5-5.4v-8.2c0-5.6-3.1-9.2-7.5-10.1V7h-4v3.3c-4.4.9-7.5 4.5-7.5 10.1v8.2zM17.5 38c.9 2.8 3.2 4.4 6.5 4.4s5.6-1.6 6.5-4.4z" /><path d="m24 15-5 9h4l-2 8 7-10h-4z" fill="var(--bg)" /></svg>
-          </div>
-          <div class="signal-art-label">Live signal</div>
-        </div>
+        <p class="channel-message" id="channel-message" role="status" hidden></p>
+        <div class="radar" aria-hidden="true"><span class="radar-ring radar-ring-one"></span><span class="radar-ring radar-ring-two"></span><span class="radar-ring radar-ring-three"></span><span class="radar-ring radar-ring-four"></span><i class="radar-dot radar-dot-one"></i><i class="radar-dot radar-dot-two"></i><i class="radar-dot radar-dot-three"></i></div>
       </section>
-
-      <section class="status-strip" id="status-strip" data-state="unknown" aria-label="Current tracker status">
-        <span class="status-strip-label">Current tracker signal</span>
-        <span class="status-strip-value" id="status-label" aria-live="polite">Checking…</span>
-        <span class="status-strip-meta" id="status-meta">Checking…</span>
-      </section>
-
-      <section class="section channel-section container" id="channels" aria-labelledby="channels-heading">
-        <div class="section-header">
-          <p class="section-kicker">Choose your channel</p>
-          <h2 id="channels-heading">Where should the signal land?</h2>
-          <p>Pick a route below. Discord is ready now; Telegram and Slack are next in line.</p>
-        </div>
-        <div class="channel-grid" role="group" aria-label="Notification channels">
-          <button class="channel-option" type="button" data-channel="discord" data-label="Discord" data-available="true" data-href="./channels/discord/" aria-pressed="true">
-            <span class="channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19.5 4.3A16.5 16.5 0 0 0 15.4 3l-.5 1a14.5 14.5 0 0 0-5.8 0l-.5-1a16.5 16.5 0 0 0-4.1 1.3C1.8 8.2 1.1 12 1.4 15.8a16.5 16.5 0 0 0 5.1 2.6l1.2-1.6a10 10 0 0 1-1.9-.9l.5-.4c3.7 1.7 8.6 1.7 12.3 0l.5.4a10 10 0 0 1-1.9.9l1.2 1.6a16.5 16.5 0 0 0 5.1-2.6c.4-4.4-.7-8.1-3.6-11.5ZM8.7 14.2c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z" /></svg></span>
-            <span class="channel-option-body"><span><strong>Discord</strong><small>Incoming webhook</small></span><span class="channel-status">Ready</span></span>
-          </button>
-          <button class="channel-option" type="button" data-channel="telegram" data-label="Telegram" data-available="false" aria-pressed="false">
-            <span class="channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m21.6 4.1-3.2 15.1c-.2 1.1-.8 1.4-1.7.9l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.3 12.9l-4.6-1.4c-1-.3-1-1 .2-1.5l18-6.9c.8-.3 1.5.2 1.7 1Z" /></svg></span>
-            <span class="channel-option-body"><span><strong>Telegram</strong><small>Bot message</small></span><span class="channel-status">Soon</span></span>
-          </button>
-          <button class="channel-option" type="button" data-channel="slack" data-label="Slack" data-available="false" aria-pressed="false">
-            <span class="channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.2 3.2a2.3 2.3 0 1 0 0 4.6h2.3V5.5a2.3 2.3 0 0 0-2.3-2.3Zm0 6.1H5.5a2.3 2.3 0 1 0 0 4.6h3.7a2.3 2.3 0 1 0 0-4.6Zm5.6 5.5v-2.3h-2.3a2.3 2.3 0 1 0 0 4.6h2.3v.7a2.3 2.3 0 1 0 4.6 0v-3Zm0-11.6a2.3 2.3 0 0 0-2.3 2.3v3.7h2.3a2.3 2.3 0 1 0 0-4.6h.7a2.3 2.3 0 0 0-.7-1.4Zm3 6.1h-3.7a2.3 2.3 0 1 0 0 4.6h3.7a2.3 2.3 0 1 0 0-4.6Z" /></svg></span>
-            <span class="channel-option-body"><span><strong>Slack</strong><small>App notification</small></span><span class="channel-status">Soon</span></span>
-          </button>
-        </div>
-        <p class="channel-message" id="channel-message" role="status">Discord is ready.</p>
-        <a class="discord-button channel-cta" id="channel-cta" href="./channels/discord/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 4.3A16.5 16.5 0 0 0 15.4 3l-.5 1a14.5 14.5 0 0 0-5.8 0l-.5-1a16.5 16.5 0 0 0-4.1 1.3C1.8 8.2 1.1 12 1.4 15.8a16.5 16.5 0 0 0 5.1 2.6l1.2-1.6a10 10 0 0 1-1.9-.9l.5-.4c3.7 1.7 8.6 1.7 12.3 0l.5.4a10 10 0 0 1-1.9.9l1.2 1.6a16.5 16.5 0 0 0 5.1-2.6c.4-4.4-.7-8.1-3.6-11.5ZM8.7 14.2c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z" /></svg><span id="channel-cta-label">Add Discord Webhook</span></a>
-        <p class="source-note">Reset data comes from <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a>, created by <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a>. It is a third-party community signal and may be delayed or inaccurate.</p>
-      </section>
-
     </main>
 
     <footer class="site-footer">
       <span>DATA: <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">HASCODEXRATELIMITRESET.TODAY</a> / <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@JSKOIZ</a></span>
-      <span><a href="https://github.com/cmel2/CodexAlert" target="_blank" rel="noreferrer">Source on GitHub ↗</a></span>
+      <span class="footer-links"><a href="./faq/">Privacy</a><b aria-hidden="true">·</b><a href="https://github.com/cmel2/CodexAlert/blob/main/LICENSE" target="_blank" rel="noreferrer">Terms</a><b aria-hidden="true">·</b><a href="https://github.com/cmel2/CodexAlert" target="_blank" rel="noreferrer">Github</a></span>
     </footer>
     <script type="module" src="/src/home.ts"></script>
   </body>

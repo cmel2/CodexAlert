@@ -29,6 +29,15 @@ describe("multi-page site contract", () => {
     }
   });
 
+  it("keeps the homepage notification control compact and complete", () => {
+    expect(homeHtml).toContain('id="channel-trigger"');
+    expect(homeHtml).toContain('id="channel-cta"');
+    expect(homeHtml.match(/role="option"/gu)).toHaveLength(3);
+    for (const label of ["Discord", "Telegram", "Slack"]) {
+      expect(homeHtml).toContain(`data-label="${label}"`);
+    }
+  });
+
   it("contains every required element selected by page scripts", () => {
     const contracts = [
       { html: discordHtml, source: discordSource },
