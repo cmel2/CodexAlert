@@ -4,16 +4,19 @@ import howItWorksHtml from "../how-it-works/index.html?raw";
 import channelsHtml from "../channels/index.html?raw";
 import discordHtml from "../channels/discord/index.html?raw";
 import faqHtml from "../faq/index.html?raw";
+import privacyHtml from "../privacy/index.html?raw";
+import termsHtml from "../terms/index.html?raw";
 import unsubscribeHtml from "../unsubscribe/index.html?raw";
 import discordSource from "./discord.ts?raw";
 import unsubscribeSource from "./unsubscribe.ts?raw";
 
-const pages = [homeHtml, howItWorksHtml, channelsHtml, discordHtml, faqHtml, unsubscribeHtml];
+const pages = [homeHtml, howItWorksHtml, channelsHtml, discordHtml, faqHtml, privacyHtml, termsHtml, unsubscribeHtml];
 
 describe("multi-page site contract", () => {
   it("keeps the source register and GitHub link in every footer", () => {
     for (const html of pages) {
-      expect(html).toContain("HASCODEXRATELIMITRESET.TODAY");
+      expect(html).toContain("hascodexratelimitreset.today");
+      expect(html).toContain("data: ");
       expect(html).toContain("https://x.com/jskoiz");
       expect(html).toContain("https://github.com/cmel2/CodexAlert");
       expect(html).not.toContain("MIT LICENSE");

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CodexAlert privacy information." />
+    <meta name="theme-color" content="#f7f9fe" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://fsawkrazbpndepoizejs.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <link rel="icon" href="/CodexAlert/favicon.svg" type="image/svg+xml" />
+    <title>Privacy — CodexAlert</title>
+  </head>
+  <body class="site-page" data-page="privacy">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="../" aria-label="CodexAlert home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 34h26l-3.5-5.4v-8.2c0-5.6-3.1-9.2-7.5-10.1V7h-4v3.3c-4.4.9-7.5 4.5-7.5 10.1v8.2zM17.5 38c.9 2.8 3.2 4.4 6.5 4.4s5.6-1.6 6.5-4.4z" /></svg></span>
+        <span>Codex<span class="brand-name-accent">Alert</span></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../how-it-works/" data-page-link="how-it-works">How it works</a>
+        <a href="../channels/" data-page-link="channels">Channels</a>
+        <a href="../faq/" data-page-link="faq">FAQ</a>
+        <a class="header-action" href="../channels/discord/">Get Notified</a>
+      </nav>
+    </header>
+
+    <main id="main" class="page-main">
+      <section class="page-hero container">
+        <h1>Privacy, plainly.</h1>
+        <p>CodexAlert is designed to deliver one useful signal without asking for an account.</p>
+      </section>
+      <section class="legal-layout container" aria-labelledby="privacy-heading">
+        <div class="legal-copy">
+          <h2 id="privacy-heading">What we store</h2>
+          <p>When you subscribe, we store the Discord webhook URL in encrypted form, a keyed duplicate fingerprint, a hashed unsubscribe token, and the delivery state needed to keep alerts reliable.</p>
+          <h2>What we do not collect</h2>
+          <p>We do not ask for your name, email address, Discord login, OAuth permission, or message history.</p>
+          <h2>How it is used</h2>
+          <p>The webhook is used to send the confirmation and future reset notifications you requested. It is never returned to the browser. Unsubscribing erases the stored credential.</p>
+          <h2>Infrastructure and sharing</h2>
+          <p>Supabase hosts the database and server functions. Discord receives a message only when a delivery is due. We do not sell personal data.</p>
+          <h2>Source limitation</h2>
+          <p>Reset data comes from <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a>, created by <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a>. It is third-party information and may be delayed or inaccurate.</p>
+          <p class="legal-updated">Last updated: 30 August 2026</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>data: <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a> / <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a></span>
+      <span class="footer-links"><a href="./">Privacy</a><b aria-hidden="true">·</b><a href="../terms/">Terms</a><b aria-hidden="true">·</b><a href="https://github.com/cmel2/CodexAlert" target="_blank" rel="noreferrer">Github</a></span>
+    </footer>
+    <script type="module" src="/src/site.ts"></script>
+  </body>
+</html>
