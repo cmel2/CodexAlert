@@ -3547,3 +3547,53 @@ body[data-page="how-it-works"] .workflow-diagram .step p {
     margin-top: 0.35rem;
   }
 }
+
+body:not([data-page="home"]) .section-header h2,
+body:not([data-page="home"]) .workflow-diagram .step h2,
+body:not([data-page="home"]) .faq-group h2,
+body:not([data-page="home"]) .legal-copy h2,
+body:not([data-page="home"]) .discord-explainer h2 {
+  font-family: Helvetica, Arial, "Nimbus Sans L", sans-serif;
+  font-size: 38px;
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+}
+
+body[data-page="how-it-works"] .section-header {
+  max-width: none;
+  align-items: center;
+  text-align: center;
+}
+
+body[data-page="how-it-works"] .section-header p {
+  text-align: center;
+}
+
+body[data-page="how-it-works"] .workflow-diagram .step p {
+  max-width: 24rem;
+}
+
+@media (min-width: 901px) {
+  body[data-page="how-it-works"] .workflow-diagram .step-icon {
+    margin-top: 0.4rem;
+  }
+
+  body[data-page="how-it-works"] .workflow-diagram .step-label {
+    margin-top: 0.45rem;
+  }
+
+  body[data-page="how-it-works"] .workflow-diagram .step h2 {
+    margin-top: 0.2rem;
+  }
+
+  body[data-page="how-it-works"] .workflow-diagram .step p {
+    margin-top: 0.3rem;
+  }
+}
+
+@media (min-width: 901px) {
+  body[data-page="how-it-works"] .how-main .section {
+    padding-bottom: 4rem;
+  }
+}
