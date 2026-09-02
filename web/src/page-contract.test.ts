@@ -33,7 +33,7 @@ describe("multi-page site contract", () => {
   });
 
   it("keeps the homepage notification control compact and complete", () => {
-    expect(homeHtml).toContain('class="home-kicker"');
+    expect(homeHtml).not.toContain("home-kicker");
     expect(homeHtml.match(/glow-action/gu)).toHaveLength(2);
     expect(homeHtml).toContain('id="channel-trigger"');
     expect(homeHtml).toContain('id="channel-cta"');
