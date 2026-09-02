@@ -53,6 +53,8 @@ describe("multi-page site contract", () => {
   it("keeps the simplified supporting pages free of removed callouts", () => {
     expect(howItWorksHtml).not.toContain("note-band");
     expect(howItWorksHtml).not.toContain("cta-strip");
+    expect(howItWorksHtml).not.toContain("workflow-connector");
+    expect(howItWorksHtml.match(/class="workflow-arrow"/gu)).toHaveLength(2);
     expect(channelsHtml).not.toContain("Source register");
     expect(channelsHtml).not.toContain("side-note");
   });

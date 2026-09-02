@@ -25,7 +25,7 @@ The homepage is a single-screen, light notification surface. It uses a quiet whi
 
 ## Typography and controls
 
-- Use Arial, Nimbus Sans L, and the platform sans-serif fallback stack for body copy and controls; keep page titles in the existing Helvetica title treatment.
+- Use Arial, Nimbus Sans L, and the platform sans-serif fallback stack for body copy and controls; keep page titles in the existing Helvetica title treatment. Subpage section headings use Helvetica at 500 weight and 38px.
 - Keep the headline large but realistic (`clamp(3rem, 5vw, 4.65rem)`) with moderate negative tracking.
 - Use medium rounded corners: roughly 14–16px for buttons and triggers, 26px for the notification container.
 - The channel dropdown contains exactly Discord, Telegram, and Slack. The selected row has a checkmark and the trigger ring follows the selected app color.
