@@ -27,7 +27,7 @@
 
     <main id="main" class="page-main how-main">
       <section class="page-hero container">
-        <p class="page-kicker">Simple as 1–2–3</p>
+        <p class="page-kicker">How it works</p>
         <h1>Less refreshing.<br /><span class="accent">More building.</span></h1>
         <p>CodexAlert turns one community-maintained reset signal into a quiet notification route. The check is shared, the signal is deduplicated, and your webhook only hears about a new event.</p>
       </section>
@@ -36,9 +36,11 @@
         <div class="section-header"><h2 id="steps-heading">The signal path</h2><p>One source, one scheduled check, one delivery per reset.</p></div>
         <div class="workflow-diagram" aria-label="Workflow from reset source to notification channel">
           <article class="step">
-            <span class="step-number">1</span>
-            <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" /><path d="M4 12h16M12 4c2.1 2.2 3.2 4.9 3.2 8S14.1 17.8 12 20c-2.1-2.2-3.2-4.9-3.2-8S9.9 6.2 12 4Z" /></svg></span>
-            <div>
+            <div class="workflow-node">
+              <span class="step-number">1</span>
+              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" /><path d="M4 12h16M12 4c2.1 2.2 3.2 4.9 3.2 8S14.1 17.8 12 20c-2.1-2.2-3.2-4.9-3.2-8S9.9 6.2 12 4Z" /></svg></span>
+            </div>
+            <div class="workflow-copy">
               <span class="step-label">SOURCE</span>
               <h2>Read the source</h2>
               <p>The shared checker reads the community reset source once per minute.</p>
@@ -46,9 +48,11 @@
           </article>
           <div class="workflow-arrow" aria-hidden="true"><span></span><svg viewBox="0 0 16 24"><path d="m2 2 12 10L2 22" /></svg></div>
           <article class="step">
-            <span class="step-number">2</span>
-            <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.6-2.8 8.2-7 10-4.2-1.8-7-5.4-7-10V6z" /><path d="m9 12 2 2 4-4" /></svg></span>
-            <div>
+            <div class="workflow-node">
+              <span class="step-number">2</span>
+              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.6-2.8 8.2-7 10-4.2-1.8-7-5.4-7-10V6z" /><path d="m9 12 2 2 4-4" /></svg></span>
+            </div>
+            <div class="workflow-copy">
               <span class="step-label">DEDUPE</span>
               <h2>Lock the event</h2>
               <p>A stable reset identity prevents duplicate notifications.</p>
@@ -56,9 +60,11 @@
           </article>
           <div class="workflow-arrow" aria-hidden="true"><span></span><svg viewBox="0 0 16 24"><path d="m2 2 12 10L2 22" /></svg></div>
           <article class="step">
-            <span class="step-number">3</span>
-            <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 17h12l-1.7-2.6V10a4.3 4.3 0 0 0-8.6 0v4.4zM9.5 19a2.7 2.7 0 0 0 5 0" /><path d="M18 6h3m-1.5-1.5v3" /></svg></span>
-            <div>
+            <div class="workflow-node">
+              <span class="step-number">3</span>
+              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 17h12l-1.7-2.6V10a4.3 4.3 0 0 0-8.6 0v4.4zM9.5 19a2.7 2.7 0 0 0 5 0" /><path d="M18 6h3m-1.5-1.5v3" /></svg></span>
+            </div>
+            <div class="workflow-copy">
               <span class="step-label">DISCORD</span>
               <h2>Send the alert</h2>
               <p>Discord receives one concise alert for a new reset.</p>

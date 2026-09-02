@@ -28,11 +28,13 @@ describe("multi-page site contract", () => {
       expect(html).toContain("How it works");
       expect(html).toContain("Channels");
       expect(html).toContain("FAQ");
-      expect(html).toContain('class="header-action"');
+      expect(html).toContain('class="header-action');
     }
   });
 
   it("keeps the homepage notification control compact and complete", () => {
+    expect(homeHtml).toContain('class="home-kicker"');
+    expect(homeHtml.match(/glow-action/gu)).toHaveLength(2);
     expect(homeHtml).toContain('id="channel-trigger"');
     expect(homeHtml).toContain('id="channel-cta"');
     expect(homeHtml.match(/role="option"/gu)).toHaveLength(3);
@@ -42,6 +44,7 @@ describe("multi-page site contract", () => {
   });
 
   it("keeps the FAQ search, topics, and answer groups available", () => {
+    expect(faqHtml).toContain('class="faq-accent"');
     expect(faqHtml).toContain('id="faq-search"');
     expect(faqHtml).toContain('id="faq-groups"');
     expect(faqHtml).toContain('id="faq-empty"');
@@ -55,8 +58,16 @@ describe("multi-page site contract", () => {
     expect(howItWorksHtml).not.toContain("cta-strip");
     expect(howItWorksHtml).not.toContain("workflow-connector");
     expect(howItWorksHtml.match(/class="workflow-arrow"/gu)).toHaveLength(2);
+    expect(howItWorksHtml.match(/class="workflow-node"/gu)).toHaveLength(3);
     expect(channelsHtml).not.toContain("Source register");
     expect(channelsHtml).not.toContain("side-note");
+  });
+
+  it("keeps the shared title and motion treatment in place", () => {
+    for (const html of [howItWorksHtml, channelsHtml, discordHtml, privacyHtml, termsHtml, unsubscribeHtml]) {
+      expect(html).toContain("page-kicker");
+    }
+    expect(howItWorksHtml).toContain("workflow-arrow");
   });
 
   it("contains every required element selected by page scripts", () => {
