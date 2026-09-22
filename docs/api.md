@@ -24,6 +24,15 @@ Created (`201`) or refreshed (`200`):
 
 The token is returned once and a duplicate subscription rotates it. Expected errors are `400`, `403`, `429`, `500`, and `502` with a stable `code` plus a safe user message.
 
+Omitting `channel` preserves the original Discord request. Slack accepts
+`{ "channel": "slack", "webhookUrl": "https://hooks.slack.com/services/…" }`.
+Telegram accepts `{ "channel": "telegram", "botToken": "<dedicated bot token>", "chatId": "<numeric ID or @channel>" }`.
+The bot must already have access to the destination. A provider test message must succeed before either route is stored.
+
+The existing encrypted credential columns contain a validated JSON destination for Slack and Telegram; legacy Discord credentials remain plain URLs inside the encryption envelope. Fingerprints are scoped by provider. Never log or return the decrypted destination.
+
+Deploy `check-reset` before `subscribe` so the scheduled checker understands new credentials before subscriptions can be created. Then publish the web frontend. Unsubscribe and automatic disabling erase the same credential columns for all three providers.
+
 ## `POST /unsubscribe`
 
 ```json

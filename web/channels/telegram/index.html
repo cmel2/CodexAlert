@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Connect Telegram to receive Codex reset alerts." />
+    <meta name="theme-color" content="#090d0e" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://fsawkrazbpndepoizejs.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <link rel="icon" href="/CodexAlert/favicon.svg" type="image/svg+xml" />
+    <title>Connect Telegram — CodexAlert</title>
+  </head>
+  <body class="site-page" data-page="channels">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="../../" aria-label="CodexAlert home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 34h26l-3.5-5.4v-8.2c0-5.6-3.1-9.2-7.5-10.1V7h-4v3.3c-4.4.9-7.5 4.5-7.5 10.1v8.2zM17.5 38c.9 2.8 3.2 4.4 6.5 4.4s5.6-1.6 6.5-4.4z" /></svg></span>
+        <span>Codex<span class="brand-name-accent">Alert</span></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../../how-it-works/" data-page-link="how-it-works">How it works</a>
+        <a href="../../channels/" data-page-link="channels">Channels</a>
+        <a href="../../faq/" data-page-link="faq">FAQ</a>
+        <a class="header-action" href="./">Get Notified</a>
+      </nav>
+    </header>
+
+    <main id="main" class="page-main">
+      <section class="page-hero container">
+        <p class="page-kicker">Telegram route</p>
+        <h1>Connect <span class="accent">Telegram.</span></h1>
+      </section>
+      <section class="discord-layout container" aria-labelledby="channel-form-heading">
+        <div class="discord-explainer">
+          <h2>Set up your channel</h2>
+          <p>Create a dedicated bot with <a href="https://t.me/BotFather" target="_blank" rel="noreferrer">@BotFather</a> and copy its token. Start a private conversation with the bot, or add it to your group. For a channel, make the bot an administrator with permission to post.</p>
+          <p>Enter the numeric chat ID, or the @username of a public channel. You can find a numeric ID in your own bot’s getUpdates response after sending it a message. Keep the token private: it controls your bot.</p>
+          <p><a href="https://core.telegram.org/bots/tutorial" target="_blank" rel="noreferrer">Telegram bot setup guide ↗</a></p>
+          <p>We send a test message before saving. Your credentials stay encrypted, and your private unsubscribe link stops future alerts.</p>
+        </div>
+        <div class="form-card">
+          <h2 id="channel-form-heading">Connect Telegram</h2>
+          <form id="subscribe-form" data-channel="telegram">
+            <label class="form-label" for="bot-token">Bot token</label>
+            <input id="bot-token" name="botToken" type="password" autocomplete="off" maxlength="150" required />
+            <label class="form-label" for="chat-id">Chat ID or public channel username</label>
+            <input id="chat-id" name="chatId" type="text" autocomplete="off" maxlength="40" placeholder="-1001234567890 or @yourchannel" required />
+            <button class="button-primary" id="subscribe-button" type="submit">Connect Telegram</button>
+            <p class="form-hint">Only connect a destination you control. Connecting sends a test message and enables reset alerts.</p>
+            <p class="form-message" id="form-message" role="status" hidden></p>
+          </form>
+          <section class="success-panel" id="success-panel" aria-live="polite" hidden>
+            <h3>Telegram connected</h3>
+            <p>Test delivered. Save this private link to stop alerts later.</p>
+            <label for="unsubscribe-link">Private unsubscribe link</label>
+            <div class="copy-row"><input id="unsubscribe-link" type="text" readonly /><button class="copy-button" id="copy-link" type="button">Copy link</button></div>
+            <p>Anyone with this link can remove this subscription.</p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>data: <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a> / <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a></span>
+      <span class="footer-links"><a href="../../privacy/">Privacy</a><b aria-hidden="true">·</b><a href="../../terms/">Terms</a><b aria-hidden="true">·</b><a href="https://github.com/cmel2/CodexAlert" target="_blank" rel="noreferrer">Github</a></span>
+    </footer>
+    <script type="module" src="/src/channel-setup.ts"></script>
+  </body>
+</html>

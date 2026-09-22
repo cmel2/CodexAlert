@@ -13,6 +13,8 @@ export default defineConfig({
         howItWorks: new URL("./how-it-works/index.html", import.meta.url).pathname,
         channels: new URL("./channels/index.html", import.meta.url).pathname,
         discord: new URL("./channels/discord/index.html", import.meta.url).pathname,
+        slack: new URL("./channels/slack/index.html", import.meta.url).pathname,
+        telegram: new URL("./channels/telegram/index.html", import.meta.url).pathname,
         faq: new URL("./faq/index.html", import.meta.url).pathname,
         privacy: new URL("./privacy/index.html", import.meta.url).pathname,
         terms: new URL("./terms/index.html", import.meta.url).pathname,

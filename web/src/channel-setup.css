@@ -1,0 +1,23 @@
+.form-card form[data-channel] .form-label {
+  color: #667694;
+  font-weight: 400;
+}
+
+.form-card form[data-channel] > input {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem;
+  border: 1px solid #d6deed;
+  border-radius: 9px;
+  background: #fff;
+  color: #10244d;
+}
+.form-card form[data-channel] > input:focus {
+  outline: 2px solid #1267f5;
+  outline-offset: 2px;
+}
+.form-card form[data-channel] > button {
+  margin-top: 0.5rem;
+}

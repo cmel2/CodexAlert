@@ -33,13 +33,13 @@
       <section class="legal-layout container" aria-labelledby="privacy-heading">
         <div class="legal-copy">
           <h2 id="privacy-heading">What we process</h2>
-          <p>When you add Discord, we receive the webhook URL you submit, an encrypted stored version, a keyed duplicate fingerprint, a hashed unsubscribe token, and delivery health data. A keyed request fingerprint helps limit abuse. We do not store raw IP addresses.</p>
+          <p>When you connect a channel, we receive its webhook URL or Telegram bot token and chat ID, an encrypted stored version, a keyed duplicate fingerprint, a hashed unsubscribe token, and delivery health data. A keyed request fingerprint helps limit abuse. We do not store raw IP addresses.</p>
           <h2>Why we use it</h2>
-          <p>That data lets us validate the route, send the test and reset alerts you request, avoid duplicate subscriptions, and protect the public endpoints. Webhook credentials are encrypted before storage and never returned to the browser.</p>
+          <p>That data lets us validate the route, send the test and reset alerts you request, avoid duplicate subscriptions, and protect the public endpoints. Channel credentials are encrypted before storage and never returned to the browser.</p>
           <h2>Providers and sharing</h2>
-          <p>Supabase provides the database and server infrastructure. Discord receives the messages needed to deliver your alert. We do not sell personal data or require a name, email address, Discord login, OAuth permission, or message history.</p>
+          <p>Supabase provides the database and server infrastructure. Your selected provider (Discord, Telegram, or Slack) receives the destination and message needed to deliver your alert. We do not sell personal data or require a name, email address, Discord login, OAuth permission, or message history.</p>
           <h2>Your control</h2>
-          <p>Your private unsubscribe link deactivates the route and erases its stored webhook credential. Keep that link private: anyone with it can remove the subscription. Reset data comes from <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a>, created by <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a>; it may be delayed or inaccurate.</p>
+          <p>Your private unsubscribe link deactivates the route and erases its stored channel credential. Keep that link private: anyone with it can remove the subscription. Reset data comes from <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a>, created by <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a>; it may be delayed or inaccurate.</p>
           <p class="legal-updated">Last updated: 2 September 2026</p>
         </div>
       </section>

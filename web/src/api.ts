@@ -57,11 +57,14 @@ export function getStatus(): Promise<PublicStatus> {
   return requestJson(functionUrl("status"), { method: "GET", headers: { Accept: "application/json" } });
 }
 
-export function subscribe(webhookUrl: string): Promise<SubscribeResult> {
+export type SubscriptionInput = { channel: "slack"; webhookUrl: string } |
+  { channel: "telegram"; botToken: string; chatId: string };
+
+export function subscribe(input: string | SubscriptionInput): Promise<SubscribeResult> {
   return requestJson(functionUrl("subscribe"), {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({ webhookUrl }),
+    body: JSON.stringify(typeof input === "string" ? { webhookUrl: input } : input),
   });
 }
 

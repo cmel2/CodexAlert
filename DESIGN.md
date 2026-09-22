@@ -35,4 +35,4 @@ The homepage is a single-screen, light notification surface. It uses a quiet whi
 
 ## Product truth
 
-Reset data comes from the third-party community tracker [hascodexratelimitreset.today](https://hascodexratelimitreset.today/), created by [@jskoiz](https://x.com/jskoiz). It may be delayed or inaccurate. Discord is the only live delivery route; Telegram and Slack are presented as coming soon until their backends are implemented.
+Reset data comes from the third-party community tracker [hascodexratelimitreset.today](https://hascodexratelimitreset.today/), created by [@jskoiz](https://x.com/jskoiz). It may be delayed or inaccurate. Discord and Slack use incoming webhooks. Telegram uses a dedicated bot token and chat ID. Every route is tested before saving.

@@ -37,7 +37,7 @@ if (trigger && menu && selectedIcon && selectedLabel && channelMessage && channe
     if (isAvailable) {
       channelMessage.hidden = true;
       channelCta.href = option.dataset.href ?? "./channels/discord/";
-      channelCtaLabel.textContent = "Add Webhook";
+      channelCtaLabel.textContent = channel === "telegram" ? "Connect Telegram" : "Add Webhook";
       channelCta.removeAttribute("aria-disabled");
     } else {
       channelMessage.hidden = false;

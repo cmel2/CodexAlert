@@ -3,6 +3,9 @@ import homeHtml from "../index.html?raw";
 import howItWorksHtml from "../how-it-works/index.html?raw";
 import channelsHtml from "../channels/index.html?raw";
 import discordHtml from "../channels/discord/index.html?raw";
+import slackHtml from "../channels/slack/index.html?raw";
+import telegramHtml from "../channels/telegram/index.html?raw";
+import channelSetupSource from "./channel-setup.ts?raw";
 import faqHtml from "../faq/index.html?raw";
 import privacyHtml from "../privacy/index.html?raw";
 import termsHtml from "../terms/index.html?raw";
@@ -10,7 +13,7 @@ import unsubscribeHtml from "../unsubscribe/index.html?raw";
 import discordSource from "./discord.ts?raw";
 import unsubscribeSource from "./unsubscribe.ts?raw";
 
-const pages = [homeHtml, howItWorksHtml, channelsHtml, discordHtml, faqHtml, privacyHtml, termsHtml, unsubscribeHtml];
+const pages = [homeHtml, howItWorksHtml, channelsHtml, discordHtml, slackHtml, telegramHtml, faqHtml, privacyHtml, termsHtml, unsubscribeHtml];
 
 describe("multi-page site contract", () => {
   it("keeps the source register and GitHub link in every footer", () => {
@@ -73,6 +76,8 @@ describe("multi-page site contract", () => {
   it("contains every required element selected by page scripts", () => {
     const contracts = [
       { html: discordHtml, source: discordSource },
+      { html: slackHtml, source: channelSetupSource },
+      { html: telegramHtml, source: channelSetupSource },
       { html: unsubscribeHtml, source: unsubscribeSource },
     ];
     for (const { html, source } of contracts) {

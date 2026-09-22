@@ -10,26 +10,26 @@ Get a notification when Codex limits appear to have reset. No account required.
 
 Reset data comes from [hascodexratelimitreset.today](https://hascodexratelimitreset.today/), created by [@jskoiz](https://x.com/jskoiz). This project is unofficial and is not affiliated with OpenAI or Discord.
 
-Discord delivery is live. Telegram and Slack are visible in the channel picker as coming-soon routes.
+Connect Discord or Slack with an incoming webhook, or Telegram with a dedicated bot token and chat ID. Each destination receives a test message before it is saved.
 
 ## How it works
 
-1. A visitor submits a Discord incoming webhook.
+1. A visitor connects a Discord or Slack incoming webhook, or a dedicated Telegram bot and chat ID.
 2. A Supabase Edge Function validates and tests it, then stores it encrypted.
 3. Supabase Cron checks the reset source once per minute.
 4. A new stable reset identifier creates one delivery per active subscription.
 
 ```text
 GitHub Pages → Supabase Edge Functions → Postgres
-                                      ↘ Discord webhooks
+                                      ↘ Discord / Telegram / Slack
 Supabase Cron → check-reset → reset source
 ```
 
 ## Security
 
-- Discord webhook URLs are encrypted with AES-256-GCM using a server-only key.
+- Webhooks and Telegram bot credentials are encrypted with AES-256-GCM using a server-only key.
 - Duplicate detection uses a keyed HMAC; unsubscribe tokens are stored as hashes.
-- Webhook URLs are restricted to approved Discord hosts and paths before any request.
+- Requests are restricted to approved Discord, Slack, and Telegram hosts and paths; redirects are blocked.
 - Application tables have RLS enabled and grant no access to `anon` or `authenticated`.
 - Privileged database functions are executable only by `service_role`.
 - The scheduled checker requires a separate secret stored in Supabase Vault.
@@ -41,7 +41,7 @@ See [SECURITY.md](SECURITY.md) to report a vulnerability. Architecture and deplo
 
 - GitHub Pages + Vite + TypeScript
 - Supabase Postgres, Edge Functions, Vault, `pg_cron`, and `pg_net`
-- Discord incoming webhooks (Telegram and Slack are planned)
+- Discord and Slack incoming webhooks; Telegram bots
 
 ## Local development
 

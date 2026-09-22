@@ -7,11 +7,11 @@ import {
   sha256Hex,
 } from "../_shared/crypto.ts";
 import {
-  confirmationMessage,
-  sendDiscordWebhook,
-  validateDiscordWebhookUrl,
-  verifyDiscordWebhook,
-} from "../_shared/discord.ts";
+  deliver,
+  destinationIdentity,
+  encodeDestination,
+  validateDestination,
+} from "../_shared/channels.ts";
 import { getRequiredEnv } from "../_shared/env.ts";
 import { logError, logEvent, safeErrorMessage } from "../_shared/logging.ts";
 import { consumeRequestLimit } from "../_shared/rate-limit.ts";
@@ -59,48 +59,24 @@ Deno.serve(async (request) => {
     }
 
     const body = await readJsonObject(request);
-    if (typeof body.webhookUrl !== "string") {
-      return publicError(
-        request,
-        400,
-        "invalid_webhook",
-        "Enter a valid Discord webhook URL.",
-      );
-    }
-
-    let webhook;
+    let destination;
     try {
-      webhook = validateDiscordWebhookUrl(body.webhookUrl);
+      destination = validateDestination(body);
     } catch {
       return publicError(
         request,
         400,
-        "invalid_webhook",
-        "Enter a valid Discord webhook URL.",
+        "invalid_destination",
+        "Enter a valid webhook, or Telegram bot token and chat ID.",
       );
     }
-
-    const verification = await verifyDiscordWebhook(webhook);
-    if (!verification.ok) {
-      const status = verification.category === "rate_limited" ? 503 : 400;
-      return publicError(
-        request,
-        status,
-        "webhook_unavailable",
-        "Discord could not verify this webhook. Check it and try again.",
-      );
-    }
-
-    const confirmation = await sendDiscordWebhook(
-      webhook.normalizedUrl,
-      confirmationMessage(),
-    );
+    const confirmation = await deliver(destination);
     if (!confirmation.ok) {
       return publicError(
         request,
         502,
         "test_delivery_failed",
-        "The webhook was found, but Discord did not accept the test message.",
+        "The channel did not accept the test message. Check the credentials and bot or webhook permissions.",
       );
     }
 
@@ -109,8 +85,8 @@ Deno.serve(async (request) => {
     const unsubscribeToken = createRandomToken();
     const [{ ciphertext, iv }, webhookFingerprint, unsubscribeTokenHash] =
       await Promise.all([
-        encryptSecret(webhook.normalizedUrl, encryptionKey),
-        hmacSha256Hex(`webhook:${webhook.normalizedUrl}`, hmacKey),
+        encryptSecret(encodeDestination(destination), encryptionKey),
+        hmacSha256Hex(destinationIdentity(destination), hmacKey),
         sha256Hex(unsubscribeToken),
       ]);
 
@@ -118,7 +94,7 @@ Deno.serve(async (request) => {
       p_webhook_ciphertext: ciphertext,
       p_webhook_iv: iv,
       p_webhook_fingerprint: webhookFingerprint,
-      p_webhook_id: webhook.webhookId,
+      p_webhook_id: destination.channel,
       p_unsubscribe_token_hash: unsubscribeTokenHash,
     });
     if (error) throw error;
@@ -132,7 +108,7 @@ Deno.serve(async (request) => {
 
     logEvent("subscription_saved", {
       subscriptionId: result.subscription_id,
-      webhookId: webhook.webhookId,
+      channel: destination.channel,
       created: result.created === true,
     });
     return jsonResponse(request, {

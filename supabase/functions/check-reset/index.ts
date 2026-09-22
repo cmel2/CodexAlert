@@ -1,11 +1,7 @@
 import { mapWithConcurrency } from "../_shared/concurrency.ts";
 import { constantTimeEqual, decryptSecret } from "../_shared/crypto.ts";
 import { createAdminClient } from "../_shared/db.ts";
-import {
-  resetNotificationMessage,
-  sendDiscordWebhook,
-  validateDiscordWebhookUrl,
-} from "../_shared/discord.ts";
+import { decodeDestination, deliver } from "../_shared/channels.ts";
 import { getPositiveIntegerEnv, getRequiredEnv } from "../_shared/env.ts";
 import { logError, logEvent, safeErrorMessage } from "../_shared/logging.ts";
 import { jsonResponse, publicError } from "../_shared/responses.ts";
@@ -210,7 +206,6 @@ Deno.serve(async (request) => {
       "PERMANENT_FAILURE_DISABLE_THRESHOLD",
       2,
     );
-    const message = resetNotificationMessage(checkedAt, parsed.resetAt);
 
     const results = await mapWithConcurrency(
       claimData.deliveries,
@@ -223,8 +218,8 @@ Deno.serve(async (request) => {
             delivery.webhookIv,
             encryptionKey,
           );
-          const webhook = validateDiscordWebhookUrl(decryptedUrl);
-          result = await sendDiscordWebhook(webhook.normalizedUrl, message);
+          const destination = decodeDestination(decryptedUrl);
+          result = await deliver(destination, checkedAt, parsed.resetAt);
           await recordDelivery(client, delivery, result, disableThreshold);
         } catch (error) {
           result = {
