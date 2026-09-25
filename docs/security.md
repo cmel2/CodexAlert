@@ -4,17 +4,29 @@
 
 The application source is safe to publish: repository and history scans found no Supabase secret keys, Discord webhook tokens, JWTs, or unsubscribe credentials. Live Supabase checks confirmed RLS is enabled on every application table, `anon` and `authenticated` have no table access, and all privileged functions are non-public. The public status API exposes only sanitized status fields.
 
-One live-project hardening item remains intentionally explicit: Supabase's advisor reports `pg_net` installed in the `public` schema. The app does not grant client roles access to its tables or internal functions, so this is not a credential leak, but moving the extension to `extensions` is recommended. Supabase's supported move drops and recreates `pg_net`, which clears the current three diagnostic HTTP response rows; the request queue is empty. Apply that maintenance change only during a planned window.
+The project has a `pg_net` in `public` advisor warning. The scheduled checker calls `net.http_post` from `public.invoke_codex_alert_check()`. An extension's registered schema can differ from the schema containing its API objects, so inspect both before considering a move. `ALTER EXTENSION ... SET SCHEMA` only works when that installed extension is relocatable. A drop/reinstall is not an automatic fallback: it can remove request/response diagnostics and disrupt the scheduled caller. Do not run the old drop/recreate recipe without separately planning and verifying the maintenance.
 
-After confirming the queue is empty and accepting the diagnostic-log loss, run this once as a database owner:
+Run this read-only inspection as a database owner:
 
 ```sql
-drop extension if exists pg_net;
-create extension pg_net with schema extensions;
-revoke all on schema net from public, anon, authenticated;
-revoke all on all tables in schema net from public, anon, authenticated;
-revoke all on all functions in schema net from public, anon, authenticated;
+select e.extversion, e.extrelocatable, n.nspname as registered_schema
+from pg_extension as e
+join pg_namespace as n on n.oid = e.extnamespace
+where e.extname = 'pg_net';
+
+select n.nspname as api_schema,
+       p.oid::regprocedure as function_name,
+       has_function_privilege('anon', p.oid, 'EXECUTE') as anon_can_execute,
+       has_function_privilege('authenticated', p.oid, 'EXECUTE') as authenticated_can_execute
+from pg_proc as p
+join pg_namespace as n on n.oid = p.pronamespace
+where n.nspname = 'net'
+order by function_name;
 ```
+
+If `extrelocatable` is true, first verify the installed version's supported move, schema usage and function grants for the scheduled function owner, then move it and test `public.invoke_codex_alert_check()` and the one-minute cron job. If it is false, leave the warning documented and keep reviewing the `net` schema's client grants; do not drop and reinstall merely to clear the advisor.
+
+The six `rls_enabled_no_policy` INFO findings cover backend-only application tables. RLS is enabled and `anon`/`authenticated` table grants are revoked by the initial migration. Edge Functions use the server-only `service_role`. No client policies are intended; do not add broad policies just to silence an informational finding.
 
 ## Protected assets
 

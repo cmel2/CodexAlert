@@ -14,7 +14,8 @@
 - [ ] `subscribe`, `unsubscribe`, `status`, and `check-reset` deployed
 - [ ] Cron schedule is `* * * * *`
 - [ ] Manual `public.invoke_codex_alert_check()` produces a successful network request
-- [ ] `pg_net` namespace warning reviewed and moved out of `public` during a planned maintenance window
+- [ ] `pg_net` registered schema, relocatability, API schema, and client grants inspected; move only if supported and scheduled cron is verified afterward
+- [ ] RLS-enabled/no-policy INFO findings reviewed against the server-only table access model in `docs/security.md`
 
 ## Product verification
 
