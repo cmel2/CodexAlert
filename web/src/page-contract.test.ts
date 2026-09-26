@@ -6,6 +6,7 @@ import discordHtml from "../channels/discord/index.html?raw";
 import slackHtml from "../channels/slack/index.html?raw";
 import telegramHtml from "../channels/telegram/index.html?raw";
 import channelSetupSource from "./channel-setup.ts?raw";
+import slackFeedSource from "./slack-feed.ts?raw";
 import faqHtml from "../faq/index.html?raw";
 import privacyHtml from "../privacy/index.html?raw";
 import termsHtml from "../terms/index.html?raw";
