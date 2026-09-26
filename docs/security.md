@@ -4,7 +4,7 @@
 
 The application source is safe to publish: repository and history scans found no Supabase secret keys, Discord webhook tokens, JWTs, or unsubscribe credentials. Live Supabase checks confirmed RLS is enabled on every application table, `anon` and `authenticated` have no table access, and all privileged functions are non-public. The public status API exposes only sanitized status fields.
 
-The project has a `pg_net` in `public` advisor warning. The scheduled checker calls `net.http_post` from `public.invoke_codex_alert_check()`. An extension's registered schema can differ from the schema containing its API objects, so inspect both before considering a move. `ALTER EXTENSION ... SET SCHEMA` only works when that installed extension is relocatable. A drop/reinstall is not an automatic fallback: it can remove request/response diagnostics and disrupt the scheduled caller. Do not run the old drop/recreate recipe without separately planning and verifying the maintenance.
+The live project has a `pg_net` in `public` advisor warning. On 2026-09-26 the installed version was 0.20.4 and `extrelocatable` was false. Its API is in `net`; the active one-minute cron job invokes it through `public.invoke_codex_alert_check()` as `postgres`. The Data API exposes `public` and `graphql_public`, not `net`, so these functions are not reachable through PostgREST. `ALTER EXTENSION ... SET SCHEMA` cannot work for this version. A drop/reinstall is not a fallback: it can remove request/response diagnostics and disrupt the scheduled caller.
 
 Run this read-only inspection as a database owner:
 
@@ -24,9 +24,9 @@ where n.nspname = 'net'
 order by function_name;
 ```
 
-If `extrelocatable` is true, first verify the installed version's supported move, schema usage and function grants for the scheduled function owner, then move it and test `public.invoke_codex_alert_check()` and the one-minute cron job. If it is false, leave the warning documented and keep reviewing the `net` schema's client grants; do not drop and reinstall merely to clear the advisor.
+If `extrelocatable` is true on a future version, first verify the supported move, schema usage and function grants for the scheduled function owner, then move it and test `public.invoke_codex_alert_check()` and the one-minute cron job. For the current version, the `net` schema and functions inherit `USAGE`/`EXECUTE` from `PUBLIC`; their owner is Supabase's internal `supabase_admin`, while the scheduled wrapper is owned by `postgres`. The CLI's `postgres` role cannot revoke grants made by `supabase_admin`. Leave the extension warning documented rather than dropping it or adding ineffective ACL changes.
 
-The six `rls_enabled_no_policy` INFO findings cover backend-only application tables. RLS is enabled and `anon`/`authenticated` table grants are revoked by the initial migration. Edge Functions use the server-only `service_role`. No client policies are intended; do not add broad policies just to silence an informational finding.
+The six `rls_enabled_no_policy` INFO findings cover backend-only application tables. RLS is enabled and live grants confirm that only `service_role` has table access. Edge Functions use that server-only role. No client policies are intended; do not add broad policies just to silence an informational finding.
 
 ## Protected assets
 

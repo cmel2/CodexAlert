@@ -1814,6 +1814,23 @@ body[data-page="home"] .site-footer {
   }
 }
 
+body[data-page="channels"] .slack-feed-command {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #d6deed;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 82%);
+  color: #10244d;
+  font: 0.95rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+body[data-page="channels"] .slack-feed-command code {
+  white-space: inherit;
+  overflow-wrap: anywhere;
+}
+
 /* Reference homepage: a quiet, fixed-viewport light surface. */
 html.home-document {
   height: 100%;

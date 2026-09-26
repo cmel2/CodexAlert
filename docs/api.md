@@ -29,9 +29,9 @@ Omitting `channel` preserves the original Discord request. Slack accepts
 Telegram accepts `{ "channel": "telegram", "botToken": "<dedicated bot token>", "chatId": "<numeric ID or @channel>" }`.
 The bot must already have access to the destination. A provider test message must succeed before either route is stored.
 
-The existing encrypted credential columns contain a validated JSON destination for Slack and Telegram; legacy Discord credentials remain plain URLs inside the encryption envelope. Fingerprints are scoped by provider. Never log or return the decrypted destination.
+The existing encrypted credential columns contain a validated JSON destination for Telegram and legacy Slack webhooks; Discord credentials remain plain URLs inside the encryption envelope. Fingerprints are scoped by provider. Never log or return the decrypted destination. New Slack setup uses the public `GET /feed` RSS endpoint instead of creating a webhook subscription.
 
-Deploy `check-reset` before `subscribe` so the scheduled checker understands new credentials before subscriptions can be created. Then publish the web frontend. Unsubscribe and automatic disabling erase the same credential columns for all three providers.
+Deploy `check-reset` before `subscribe` so the scheduled checker understands new credentials before subscriptions can be created. Then publish the web frontend. Unsubscribe and automatic disabling erase direct-delivery credentials; the Slack RSS route creates no CodexAlert subscription row.
 
 ## `POST /unsubscribe`
 
@@ -61,6 +61,18 @@ For any well-formed token, including reused/nonexistent tokens:
 ```
 
 `state` is `yes`, `no`, or `unknown`. Dates are ISO 8601 UTC strings or `null`.
+
+## `GET /feed`
+
+Returns a public RSS 2.0 feed containing the latest reset event (or an empty
+channel before the first event). Slack users subscribe with Slack's RSS app:
+
+```text
+/feed subscribe https://YOUR_PROJECT_REF.supabase.co/functions/v1/feed
+```
+
+The stable event identifier is the RSS GUID. The feed is cached for at most 30
+seconds and contains no subscriber or credential data.
 
 ## `POST /check-reset`
 

@@ -2,7 +2,7 @@
 
 ## Components
 
-The browser is an untrusted static client. It knows only the Supabase project URL and calls three public Edge Functions. Those functions use the hosted server-side key to reach RLS-protected tables and service-role-only RPCs. The scheduled function is not a public product API: Postgres invokes it using a dedicated secret stored in Vault.
+The browser is an untrusted static client. It knows only the Supabase project URL and calls public Edge Functions. Those functions use the hosted server-side key to reach RLS-protected tables and service-role-only RPCs. The scheduled function is not a public product API: Postgres invokes it using a dedicated secret stored in Vault. The public RSS feed returns the latest sanitized reset event for Slack's RSS app without storing a Slack destination.
 
 One cron execution performs one third-party status request regardless of subscriber count.
 
@@ -25,9 +25,9 @@ One cron execution performs one third-party status request regardless of subscri
 4. `state = no` updates the singleton status and appends a check record for observability; detailed history should be reviewed or pruned according to the operator's retention policy.
 5. `state = yes` requires a stable identity: normalized `resetAt`, source event ID, or source-event checked time. Top-level `updatedAt` is never an identity.
 6. `claim_reset_deliveries` takes an advisory transaction lock and inserts the unique reset event. If it already exists, it returns no work.
-7. For a new event, one unique delivery row is created for every active subscription and changed from `pending` to `processing` inside the same transaction.
-8. The function decrypts and revalidates each URL, then posts with configurable bounded concurrency.
-9. Each outcome transactionally updates the delivery and subscription health. Two permanent failures disable the subscription and erase its credential by default.
+7. For a new event, one unique delivery row is created for every active Discord and Telegram subscription and changed from `pending` to `processing` inside the same transaction.
+8. The function decrypts and revalidates each destination, then posts with configurable bounded concurrency. The public RSS feed exposes the latest event for Slack to poll.
+9. Each direct delivery outcome transactionally updates delivery and subscription health. Two permanent failures disable the subscription and erase its credential by default.
 10. The batch summary updates the reset ledger and singleton public status.
 
 ## Idempotency and failure semantics

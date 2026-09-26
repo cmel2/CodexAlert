@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Connect Slack to receive Codex reset alerts." />
+    <meta name="description" content="Subscribe a Slack channel to CodexAlert live status updates with the RSS app." />
     <meta name="theme-color" content="#090d0e" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://fsawkrazbpndepoizejs.supabase.co http://127.0.0.1:54321; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
     <link rel="icon" href="/CodexAlert/favicon.svg" type="image/svg+xml" />
@@ -21,7 +21,7 @@
         <a href="../../how-it-works/" data-page-link="how-it-works">How it works</a>
         <a href="../../channels/" data-page-link="channels">Channels</a>
         <a href="../../faq/" data-page-link="faq">FAQ</a>
-        <a class="header-action" href="./">Get Notified</a>
+        <a class="header-action" href="../../">Get Notified</a>
       </nav>
     </header>
 
@@ -32,27 +32,17 @@
       </section>
       <section class="discord-layout container" aria-labelledby="channel-form-heading">
         <div class="discord-explainer">
-          <h2>Set up your channel</h2>
-          <p>Create a Slack app, enable Incoming Webhooks, and add a webhook to a channel you manage.</p>
-          <p><a href="https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/" target="_blank" rel="noreferrer">Slack setup guide ↗</a></p>
-          <p>We send a test message before saving. Your credentials stay encrypted, and your private unsubscribe link stops future alerts.</p>
+          <h2>One command in Slack</h2>
+          <p>Install Slack’s RSS app if it isn’t already in your workspace. In the channel where you want updates, paste the command and send it.</p>
+          <p>Slack checks this public feed for new resets. You can manage or remove the subscription with Slack’s <code>/feed</code> commands.</p>
+          <p><a href="https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack" target="_blank" rel="noreferrer">Slack RSS setup guide ↗</a></p>
         </div>
         <div class="form-card">
-          <h2 id="channel-form-heading">Connect Slack</h2>
-          <form id="subscribe-form" data-channel="slack">
-            <label class="form-label" for="webhook-url">Slack incoming webhook URL</label>
-            <input id="webhook-url" name="webhookUrl" type="password" autocomplete="off" maxlength="500" placeholder="https://hooks.slack.com/services/…" required />
-            <button class="button-primary" id="subscribe-button" type="submit">Connect Slack</button>
-            <p class="form-hint">Only connect a destination you control. Connecting sends a test message and enables reset alerts.</p>
-            <p class="form-message" id="form-message" role="status" hidden></p>
-          </form>
-          <section class="success-panel" id="success-panel" aria-live="polite" hidden>
-            <h3>Slack connected</h3>
-            <p>Test delivered. Save this private link to stop alerts later.</p>
-            <label for="unsubscribe-link">Private unsubscribe link</label>
-            <div class="copy-row"><input id="unsubscribe-link" type="text" readonly /><button class="copy-button" id="copy-link" type="button">Copy link</button></div>
-            <p>Anyone with this link can remove this subscription.</p>
-          </section>
+          <h2 id="channel-form-heading">Subscribe to CodexAlert</h2>
+          <p>To receive live status updates in Slack, copy and paste the text below into the Slack channel of your choice:</p>
+          <pre class="slack-feed-command"><code id="slack-feed-command">/feed subscribe https://fsawkrazbpndepoizejs.supabase.co/functions/v1/feed</code></pre>
+          <button class="button-primary" id="copy-slack-feed" type="button">Copy command</button>
+          <p class="form-message" id="slack-feed-message" role="status" hidden></p>
         </div>
       </section>
     </main>
@@ -61,6 +51,6 @@
       <span>data: <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a> / <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a></span>
       <span class="footer-links"><a href="../../privacy/">Privacy</a><b aria-hidden="true">·</b><a href="../../terms/">Terms</a><b aria-hidden="true">·</b><a href="https://github.com/cmel2/CodexAlert" target="_blank" rel="noreferrer">Github</a></span>
     </footer>
-    <script type="module" src="/src/channel-setup.ts"></script>
+    <script type="module" src="/src/slack-feed.ts"></script>
   </body>
 </html>

@@ -37,9 +37,9 @@
           <h2>Why we use it</h2>
           <p>That data lets us validate the route, send the test and reset alerts you request, avoid duplicate subscriptions, and protect the public endpoints. Channel credentials are encrypted before storage and never returned to the browser.</p>
           <h2>Providers and sharing</h2>
-          <p>Supabase provides the database and server infrastructure. Your selected provider (Discord, Telegram, or Slack) receives the destination and message needed to deliver your alert. We do not sell personal data or require a name, email address, Discord login, OAuth permission, or message history.</p>
+          <p>Supabase provides the database and server infrastructure. Discord and Telegram receive the credentials needed to deliver your alerts. For Slack RSS, we store no Slack destination or credential; Slack periodically fetches CodexAlert’s public reset feed. We do not sell personal data or require a name, email address, Discord login, OAuth permission, or message history.</p>
           <h2>Your control</h2>
-          <p>Your private unsubscribe link deactivates the route and erases its stored channel credential. Keep that link private: anyone with it can remove the subscription. Reset data comes from <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a>, created by <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a>; it may be delayed or inaccurate.</p>
+          <p>For Discord and Telegram, your private unsubscribe link deactivates the route and erases its stored credential; anyone with the link can remove it. For Slack RSS, use Slack’s <code>/feed list</code> and <code>/feed remove</code> commands. Reset data comes from <a href="https://hascodexratelimitreset.today/" target="_blank" rel="noreferrer">hascodexratelimitreset.today</a>, created by <a href="https://x.com/jskoiz" target="_blank" rel="noreferrer">@jskoiz</a>; it may be delayed or inaccurate.</p>
           <p class="legal-updated">Last updated: 2 September 2026</p>
         </div>
       </section>

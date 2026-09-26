@@ -11,7 +11,7 @@
 - [ ] Encryption key backed up outside the repository/database
 - [ ] `codex_alert_project_url` created in Vault
 - [ ] Matching `codex_alert_cron_secret` created in Vault
-- [ ] `subscribe`, `unsubscribe`, `status`, and `check-reset` deployed
+- [ ] `subscribe`, `unsubscribe`, `status`, `feed`, and `check-reset` deployed
 - [ ] Cron schedule is `* * * * *`
 - [ ] Manual `public.invoke_codex_alert_check()` produces a successful network request
 - [ ] `pg_net` registered schema, relocatability, API schema, and client grants inspected; move only if supported and scheduled cron is verified afterward
@@ -38,8 +38,8 @@
 - [ ] Edge `ALLOWED_ORIGINS` contains the exact Pages origin
 - [ ] Pages source set to GitHub Actions
 - [ ] Workflow tests/build succeeds
-- [ ] Home, `/how-it-works/`, `/channels/`, `/channels/discord/`, `/faq/`, `/privacy/`, `/terms/`, and `/unsubscribe/` load under `/CodexAlert/`
-- [ ] Channel chooser, Discord subscribe/copy-link, status, and unsubscribe flows work in production
+- [ ] Home, `/how-it-works/`, `/channels/`, `/channels/discord/`, `/channels/telegram/`, `/channels/slack/`, `/faq/`, `/privacy/`, `/terms/`, and `/unsubscribe/` load under `/CodexAlert/`
+- [ ] Channel chooser, Discord/Telegram subscribe, Slack RSS command, public feed, status, and unsubscribe flows work in production
 - [ ] Mobile, tablet, keyboard, and reduced-motion behavior checked
 - [ ] Footer and notification disclaimer are visible and accurate
 

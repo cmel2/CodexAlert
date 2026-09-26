@@ -10,7 +10,7 @@ function readSupabaseUrl(): string {
   url.pathname = url.pathname.replace(/\/$/u, "");
   return url.toString().replace(/\/$/u, "");
 }
-export function functionUrl(name: "subscribe" | "unsubscribe" | "status"): string {
+export function functionUrl(name: "subscribe" | "unsubscribe" | "status" | "feed"): string {
   return `${readSupabaseUrl()}/functions/v1/${name}`;
 }
 

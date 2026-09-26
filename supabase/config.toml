@@ -26,5 +26,8 @@ verify_jwt = false
 [functions.status]
 verify_jwt = false
 
+[functions.feed]
+verify_jwt = false
+
 [functions.check-reset]
 verify_jwt = false
