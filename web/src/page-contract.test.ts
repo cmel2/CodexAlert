@@ -76,8 +76,8 @@ describe("multi-page site contract", () => {
   it("contains every required element selected by page scripts", () => {
     const contracts = [
       { html: discordHtml, source: discordSource },
-      { html: slackHtml, source: channelSetupSource },
       { html: telegramHtml, source: channelSetupSource },
+      { html: slackHtml, source: slackFeedSource },
       { html: unsubscribeHtml, source: unsubscribeSource },
     ];
     for (const { html, source } of contracts) {
