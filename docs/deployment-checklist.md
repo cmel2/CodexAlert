@@ -39,7 +39,9 @@
 - [ ] Pages source set to GitHub Actions
 - [ ] Workflow tests/build succeeds
 - [ ] Home, `/how-it-works/`, `/channels/`, `/channels/discord/`, `/channels/telegram/`, `/channels/slack/`, `/faq/`, `/privacy/`, `/terms/`, and `/unsubscribe/` load under `/CodexAlert/`
-- [ ] Channel chooser, Discord/Telegram subscribe, Slack RSS command, public feed, status, and unsubscribe flows work in production
+- [ ] Channel chooser, Discord subscribe, Telegram bot `/start` and `/stop`, Slack RSS command, public feed, status, and unsubscribe flows work in production
+- [ ] `TELEGRAM_BOT_TOKEN` and a strong `TELEGRAM_WEBHOOK_SECRET` are configured as Supabase Edge Function secrets
+- [ ] Telegram setup page configures only the expected webhook URL; a private-chat `/start` subscribes and `/stop` removes the subscription
 - [ ] Mobile, tablet, keyboard, and reduced-motion behavior checked
 - [ ] Footer and notification disclaimer are visible and accurate
 

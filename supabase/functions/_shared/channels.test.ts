@@ -74,6 +74,40 @@ Deno.test("Encrypted envelopes round trip and legacy Discord remains compatible"
     destinationIdentity(telegram),
     "telegram:123456789:-1001234567890",
   );
+
+  const sharedTelegram = { channel: "telegram" as const, chatId: "123456789" };
+  assertEquals(
+    decodeDestination(encodeDestination(sharedTelegram)),
+    sharedTelegram,
+  );
+  assertEquals(
+    destinationIdentity(sharedTelegram),
+    "telegram:shared:123456789",
+  );
+});
+
+Deno.test("Shared Telegram delivery uses the server bot token", async () => {
+  const previousToken = Deno.env.get("TELEGRAM_BOT_TOKEN");
+  Deno.env.set("TELEGRAM_BOT_TOKEN", token);
+  try {
+    const result = await deliver(
+      { channel: "telegram", chatId: "123456789" },
+      undefined,
+      null,
+      async (url, init) => {
+        assertEquals(
+          String(url),
+          `https://api.telegram.org/bot${token}/sendMessage`,
+        );
+        assertEquals(JSON.parse(String(init?.body)).chat_id, "123456789");
+        return new Response(JSON.stringify({ ok: true }), { status: 200 });
+      },
+    );
+    assertEquals(result.ok, true);
+  } finally {
+    if (previousToken === undefined) Deno.env.delete("TELEGRAM_BOT_TOKEN");
+    else Deno.env.set("TELEGRAM_BOT_TOKEN", previousToken);
+  }
 });
 
 Deno.test("Telegram posts plain text only to fixed API host", async () => {

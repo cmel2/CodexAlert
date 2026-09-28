@@ -11,6 +11,12 @@ export interface SubscribeResult {
   message: string;
 }
 
+export interface TelegramSetupResult {
+  success: true;
+  username: string;
+  botUrl: string;
+}
+
 interface ErrorBody {
   message?: unknown;
 }
@@ -73,5 +79,13 @@ export function unsubscribe(token: string): Promise<{ success: true; message: st
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify({ token }),
+  });
+}
+
+export function setupTelegramBot(): Promise<TelegramSetupResult> {
+  return requestJson(functionUrl("telegram-setup"), {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: "{}",
   });
 }

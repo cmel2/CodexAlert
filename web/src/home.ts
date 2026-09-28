@@ -40,7 +40,7 @@ if (trigger && menu && selectedIcon && selectedLabel && channelMessage && channe
       channelCtaLabel.textContent = channel === "slack"
         ? "Get Slack Feed"
         : channel === "telegram"
-        ? "Connect Telegram"
+        ? "Open Telegram"
         : "Add Webhook";
       channelCta.removeAttribute("aria-disabled");
     } else {

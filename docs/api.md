@@ -27,11 +27,15 @@ The token is returned once and a duplicate subscription rotates it. Expected err
 Omitting `channel` preserves the original Discord request. Slack accepts
 `{ "channel": "slack", "webhookUrl": "https://hooks.slack.com/services/…" }`.
 Telegram accepts `{ "channel": "telegram", "botToken": "<dedicated bot token>", "chatId": "<numeric ID or @channel>" }`.
-The bot must already have access to the destination. A provider test message must succeed before either route is stored.
+The bot must already have access to the destination. A provider test message must succeed before either route is stored. This direct-token Telegram shape remains available for existing integrations; the website uses the shared CodexAlert bot flow below.
 
 The existing encrypted credential columns contain a validated JSON destination for Telegram and legacy Slack webhooks; Discord credentials remain plain URLs inside the encryption envelope. Fingerprints are scoped by provider. Never log or return the decrypted destination. New Slack setup uses the public `GET /feed` RSS endpoint instead of creating a webhook subscription.
 
 Deploy `check-reset` before `subscribe` so the scheduled checker understands new credentials before subscriptions can be created. Then publish the web frontend. Unsubscribe and automatic disabling erase direct-delivery credentials; the Slack RSS route creates no CodexAlert subscription row.
+
+## Telegram bot
+
+The website calls `POST /telegram-setup` with `{}` to register the configured shared bot's webhook, then receives its public `t.me` link. Telegram sends updates to `POST /telegram-updates` with `X-Telegram-Bot-Api-Secret-Token`; only private-chat `/start`, `/subscribe`, `/stop`, `/unsubscribe`, and `/help` commands are handled. Starting creates the subscription; `/stop` deactivates it and clears the encrypted destination. The bot token and webhook secret are server-side Supabase secrets, never frontend values.
 
 ## `POST /unsubscribe`
 

@@ -1,5 +1,6 @@
 import type { Destination } from "./channels.ts";
 import type { DiscordDeliveryResult } from "./types.ts";
+import { getRequiredEnv } from "./env.ts";
 
 export async function sendProviderMessage(
   destination: Exclude<Destination, { channel: "discord" }>,
@@ -7,8 +8,11 @@ export async function sendProviderMessage(
   fetcher: typeof fetch = fetch,
 ): Promise<DiscordDeliveryResult> {
   const telegram = destination.channel === "telegram";
+  const telegramToken = telegram
+    ? destination.botToken ?? getRequiredEnv("TELEGRAM_BOT_TOKEN")
+    : null;
   const url = telegram
-    ? `https://api.telegram.org/bot${destination.botToken}/sendMessage`
+    ? `https://api.telegram.org/bot${telegramToken}/sendMessage`
     : destination.webhookUrl;
   const payload = telegram
     ? {

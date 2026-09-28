@@ -31,3 +31,9 @@ verify_jwt = false
 
 [functions.check-reset]
 verify_jwt = false
+
+[functions.telegram-updates]
+verify_jwt = false
+
+[functions.telegram-setup]
+verify_jwt = false

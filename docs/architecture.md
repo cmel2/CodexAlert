@@ -17,6 +17,8 @@ One cron execution performs one third-party status request regardless of subscri
 7. It encrypts the canonical URL, creates a keyed HMAC fingerprint, and creates a random unsubscribe token/hash.
 8. A transaction serializes on the fingerprint and inserts or refreshes exactly one active subscription. Refreshing rotates the unsubscribe token, invalidating the older management link.
 
+Telegram differs from direct webhook setup: the user opens the shared CodexAlert bot and sends `/start` in a private chat. Telegram's webhook secret header is checked before parsing updates; the Telegram chat ID is encrypted, while the bot token remains a Supabase secret. `/stop` or blocking the bot deactivates the route and clears the stored destination.
+
 ## Reset sequence
 
 1. Cron invokes `check-reset` every minute through `pg_net`.
@@ -25,7 +27,7 @@ One cron execution performs one third-party status request regardless of subscri
 4. `state = no` updates the singleton status and appends a check record for observability; detailed history should be reviewed or pruned according to the operator's retention policy.
 5. `state = yes` requires a stable identity: normalized `resetAt`, source event ID, or source-event checked time. Top-level `updatedAt` is never an identity.
 6. `claim_reset_deliveries` takes an advisory transaction lock and inserts the unique reset event. If it already exists, it returns no work.
-7. For a new event, one unique delivery row is created for every active Discord and Telegram subscription and changed from `pending` to `processing` inside the same transaction.
+7. For a new event, one unique delivery row is created for every active Discord and Telegram subscription and changed from `pending` to `processing` inside the same transaction. Telegram delivery uses the shared server-side bot token with the encrypted chat ID.
 8. The function decrypts and revalidates each destination, then posts with configurable bounded concurrency. The public RSS feed exposes the latest event for Slack to poll.
 9. Each direct delivery outcome transactionally updates delivery and subscription health. Two permanent failures disable the subscription and erase its credential by default.
 10. The batch summary updates the reset ledger and singleton public status.

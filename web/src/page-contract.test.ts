@@ -5,7 +5,7 @@ import channelsHtml from "../channels/index.html?raw";
 import discordHtml from "../channels/discord/index.html?raw";
 import slackHtml from "../channels/slack/index.html?raw";
 import telegramHtml from "../channels/telegram/index.html?raw";
-import channelSetupSource from "./channel-setup.ts?raw";
+import telegramSetupSource from "./telegram-setup.ts?raw";
 import slackFeedSource from "./slack-feed.ts?raw";
 import faqHtml from "../faq/index.html?raw";
 import privacyHtml from "../privacy/index.html?raw";
@@ -77,7 +77,7 @@ describe("multi-page site contract", () => {
   it("contains every required element selected by page scripts", () => {
     const contracts = [
       { html: discordHtml, source: discordSource },
-      { html: telegramHtml, source: channelSetupSource },
+      { html: telegramHtml, source: telegramSetupSource },
       { html: slackHtml, source: slackFeedSource },
       { html: unsubscribeHtml, source: unsubscribeSource },
     ];

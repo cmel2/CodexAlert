@@ -2845,6 +2845,30 @@ body:not([data-page="home"]) .success-panel p {
   color: var(--page-muted);
 }
 
+body[data-page="channels"] .telegram-bot-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  margin-top: 0.75rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgb(18 103 245 / 28%);
+  border-radius: 10px;
+  color: var(--page-blue);
+  font-weight: 600;
+  text-decoration: none;
+  background: rgb(18 103 245 / 6%);
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+body[data-page="channels"] .telegram-bot-link:hover {
+  border-color: var(--page-blue);
+  background: rgb(18 103 245 / 10%);
+}
+
+body[data-page="channels"] .telegram-bot-link[hidden] {
+  display: none;
+}
+
 body:not([data-page="home"]) .copy-button {
   border-color: #b9c8e4;
   color: var(--page-blue);

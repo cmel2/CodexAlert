@@ -10,12 +10,12 @@ Get a notification when Codex limits appear to have reset. No account required.
 
 Reset data comes from [hascodexratelimitreset.today](https://hascodexratelimitreset.today/), created by [@jskoiz](https://x.com/jskoiz). This project is unofficial and is not affiliated with OpenAI, Discord, Telegram, or Slack.
 
-Connect Discord with an incoming webhook or Telegram with a dedicated bot token and chat ID. Slack users subscribe to the public RSS feed with Slack’s `/feed subscribe` command.
+Connect Discord with an incoming webhook, subscribe to the CodexAlert Telegram bot with `/start`, or add the public RSS feed to Slack.
 
 ## How it works
 
-1. A visitor connects a Discord webhook or Telegram bot and chat ID, or subscribes a Slack channel to the public RSS feed.
-2. Supabase validates and tests direct delivery destinations, then stores their credentials encrypted. Slack RSS requires no CodexAlert account or stored destination.
+1. A visitor connects a Discord webhook, starts the CodexAlert bot in a private Telegram chat, or subscribes a Slack channel to the public RSS feed.
+2. Supabase tests Discord destinations, encrypts delivery destinations, and keeps the Telegram bot token server-side. Slack RSS requires no CodexAlert account or stored destination.
 3. Supabase Cron checks the reset source once per minute.
 4. A new stable reset identifier creates one delivery per active Discord or Telegram subscription; the RSS endpoint exposes the latest reset for Slack.
 
@@ -28,7 +28,8 @@ Supabase Cron → check-reset → reset source
 
 ## Security
 
-- Discord webhook URLs and Telegram bot credentials are encrypted with AES-256-GCM using a server-only key.
+- Discord webhooks and Telegram delivery destinations are encrypted with AES-256-GCM using a server-only key; the shared Telegram bot token is held as a Supabase secret.
+- Telegram webhook requests are authenticated using Telegram's configured secret-token header; `/stop` removes the active chat destination.
 - Duplicate detection uses a keyed HMAC; unsubscribe tokens are stored as hashes.
 - Requests are restricted to approved Discord and Telegram hosts; redirects are blocked. Slack receives the public RSS feed through its RSS app.
 - Application tables have RLS enabled and grant no access to `anon` or `authenticated`.
@@ -42,7 +43,7 @@ See [SECURITY.md](SECURITY.md) to report a vulnerability. Architecture and deplo
 
 - GitHub Pages + Vite + TypeScript
 - Supabase Postgres, Edge Functions, Vault, `pg_cron`, and `pg_net`
-- Discord incoming webhooks, Telegram bots, and a public RSS feed for Slack
+- Discord incoming webhooks, the CodexAlert Telegram bot, and a public RSS feed for Slack
 
 ## Local development
 

@@ -11,7 +11,7 @@ import { sendProviderMessage } from "./provider-delivery.ts";
 export type Destination = { channel: "discord"; webhookUrl: string } | {
   channel: "slack";
   webhookUrl: string;
-} | { channel: "telegram"; botToken: string; chatId: string };
+} | { channel: "telegram"; botToken?: string; chatId: string };
 
 export function validateDestination(
   body: Record<string, unknown>,
@@ -56,9 +56,21 @@ export function encodeDestination(destination: Destination): string {
 }
 
 export function decodeDestination(secret: string): Destination {
-  return validateDestination(
-    secret.startsWith("{") ? JSON.parse(secret) : { webhookUrl: secret },
-  );
+  if (!secret.startsWith("{")) {
+    return validateDestination({ webhookUrl: secret });
+  }
+
+  const body = JSON.parse(secret) as Record<string, unknown>;
+  if (body.channel === "telegram" && body.botToken === undefined) {
+    if (
+      typeof body.chatId !== "string" ||
+      !/^[1-9]\d{0,15}$/u.test(body.chatId)
+    ) {
+      throw new TypeError("Invalid Telegram chat");
+    }
+    return { channel: "telegram", chatId: body.chatId };
+  }
+  return validateDestination(body);
 }
 
 export function destinationIdentity(destination: Destination): string {
@@ -66,6 +78,7 @@ export function destinationIdentity(destination: Destination): string {
     return `webhook:${destination.webhookUrl}`;
   }
   if (destination.channel === "slack") return `slack:${destination.webhookUrl}`;
+  if (!destination.botToken) return `telegram:shared:${destination.chatId}`;
   return `telegram:${
     destination.botToken.split(":")[0]
   }:${destination.chatId.toLowerCase()}`;
